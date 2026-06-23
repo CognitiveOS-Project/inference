@@ -1,0 +1,34 @@
+# Go
+/bin/
+/tmp/
+*.exe
+*.test
+*.out
+/vendor/
+/go/pkg/
+*.sum
+go.work
+
+# C/C++ build artifacts
+/build/
+*.o
+*.a
+*.so
+*.dylib
+*.gguf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
