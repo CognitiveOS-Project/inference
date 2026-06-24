@@ -27,6 +27,9 @@ venv/
 .DS_Store
 Thumbs.db
 
+# Editor backups
+* 2.*
+
 # IDE
 .idea/
 .vscode/
