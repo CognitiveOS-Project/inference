@@ -50,6 +50,14 @@ go build -o bin/coginfer ./cmd/coginfer
 - **mock** — Simulated token generation with delays. Default for development.
 - **cli** — Shells out to `llama-cli` for real inference on device.
 
+## Related
+
+- [CognitiveOS](https://github.com/CognitiveOS-Project/cognitiveos) — main project repository
+- [cognitive-os.org](https://cognitive-os.org) — project website
+- [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages model lifecycle
+- [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — inference API specification
+- [CognitiveOS Project](https://github.com/CognitiveOS-Project) — GitHub organization
+
 ## Author
 
 **Jean Machuca** — [GitHub](https://github.com/jeanmachuca) · [Sponsor](https://github.com/sponsors/jeanmachuca)
