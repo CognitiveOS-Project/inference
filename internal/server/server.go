@@ -151,7 +151,9 @@ func (s *Server) Listen(addr string) error {
 func sendJSON(w http.ResponseWriter, status int, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(v)
+	if err := json.NewEncoder(w).Encode(v); err != nil {
+		log.Printf("sendJSON encode error: %v", err)
+	}
 }
 
 func sendError(w http.ResponseWriter, status int, msg string) {
@@ -428,7 +430,7 @@ func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 	// Accept body or query param
 	var req deleteRequest
 	if r.Method == http.MethodPost {
-		json.NewDecoder(r.Body).Decode(&req)
+		json.NewDecoder(r.Body).Decode(&req) // body is optional for DELETE
 	}
 
 	s.mu.Lock()
