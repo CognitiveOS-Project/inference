@@ -7,6 +7,7 @@
 /vendor/
 /go/pkg/
 *.sum
+!go.sum
 go.work
 
 # C/C++ build artifacts
@@ -35,3 +36,4 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+coginfer
