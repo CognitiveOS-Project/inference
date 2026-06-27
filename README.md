@@ -1,23 +1,33 @@
-# inference — CogInfer
+# inference — CogInfer + CogRaw
 
-CognitiveOS inference engine — local LLM runtime for Raw Model and Wide Model execution. Exposes an Ollama-compatible HTTP API with CognitiveOS extensions.
+CognitiveOS inference engine — local LLM runtime for both **Raw Model** (firmware guardrail) and **Wide Model** (operational inference). Contains two binaries:
+
+- `coginfer` — Ollama-compatible HTTP inference server for the Wide Model
+- `cograw` — Root-level RPC server for the Raw Model (firmware GGUF guardrail)
 
 ## Architecture
 
 ```
-cmd/coginfer             — Entry point, flag parsing
+cmd/coginfer             — Wide Model inference server (HTTP, Ollama-compatible)
+cmd/cograw               — Raw Model RPC server (Unix socket, JSON-RPC 2.0)
 internal/server/         — HTTP server with all API handlers
 internal/llm/            — Backend interface + implementations (mock, cli)
 internal/model/          — Model scanning and .gguf metadata discovery
 ```
 
-## Build
+## Binaries
+
+### coginfer (Wide Model)
+
+Exposes an Ollama-compatible HTTP API for the general-purpose Wide Model.
+
+#### Build
 
 ```bash
 go build -o bin/coginfer ./cmd/coginfer
 ```
 
-## Usage
+#### Usage
 
 ```bash
 # Start with mock backend (no llama.cpp needed)
@@ -30,7 +40,7 @@ go build -o bin/coginfer ./cmd/coginfer
 ./bin/coginfer --addr 127.0.0.1:11434 --log /cognitiveos/logs/inference.log
 ```
 
-## API
+#### API
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -45,17 +55,82 @@ go build -o bin/coginfer ./cmd/coginfer
 | GET  | `/cognitiveos/capabilities` | Hardware capabilities |
 | GET  | `/health` | Healthcheck |
 
-## Backends
+#### Backends
 
 - **mock** — Simulated token generation with delays. Default for development.
 - **cli** — Shells out to `llama-cli` for real inference on device.
 
+### cograw (Raw Model — Firmware Guardrail)
+
+A small, always-on RPC server that acts as the firmware-level guardrail between the human and the Wide Model. Runs as root, communicates over a Unix socket via JSON-RPC 2.0.
+
+**Key constraint:** cograw has **no knowledge of MCP tools or registries** — it is a pure guardrail GGUF. Tool routing is the daemon's responsibility.
+
+For the authoritative specification, see [raw-model.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md) in the product-specs repo.
+
+#### Build
+
+```bash
+go build -o bin/cograw ./cmd/cograw
+```
+
+#### Usage
+
+```bash
+./bin/cograw \
+  --socket /cognitiveos/run/raw.sock \
+  --model /cognitiveos/models/raw/raw-model.gguf \
+  --llama-bin /usr/bin/llama-cli
+```
+
+#### Flags
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--socket` | `/cognitiveos/run/raw.sock` | Unix socket path for JSON-RPC |
+| `--model` | `/cognitiveos/models/raw/raw-model.gguf` | Path to raw model GGUF file |
+| `--llama-bin` | `llama-cli` | Path to llama-cli for tensor integrity check |
+| `--log` | (stderr) | Log file path |
+
+#### RPC Methods
+
+| Method | Description |
+|--------|-------------|
+| `validate_system_code` | Validate a system code (wake/idle/security/reset/unlock) |
+| `check_unlock_code` | Validate an unlock code for a paid patch |
+| `audit_resources` | Check hardware resources before Wide Model load |
+| `healthcheck` | Return whether the Raw Model is running and ready |
+| `version` | Return Raw Model version and model info |
+| `validate_prompt` | Guardrail check: allow/deny/modify a prompt before it reaches the Wide Model |
+
+Detailed parameter and response schemas are in the [product-specs RPC methods table](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md#rpc-methods).
+
+#### Role in System
+
+```
+Human → cli → cognitiveosd → cograw (validate) → Wide Model (generate) → cognitiveosd (parse, route MCP) → cli
+```
+
+1. Human input arrives at the daemon via CLI
+2. Daemon sends the prompt to cograw for guardrail validation
+3. If allowed, daemon forwards to Wide Model for inference
+4. Daemon parses the Wide Model response and routes tool calls to MCP servers
+5. Final output returned to CLI
+
+cograw **must start before** cognitiveosd — the daemon hard-fails if the raw socket is unavailable at boot.
+
+#### Model Protection
+
+The raw model file is stored at `/cognitiveos/models/raw/raw-model.gguf` on a read-only squashfs partition:
+- Owner: `root:root`
+- Permissions: `0400`
+- The Wide Model has **no read access**
+- Only a full firmware update (physical reflash or signed update) can change it
+
 ## Related
 
-- [CognitiveOS](https://github.com/CognitiveOS-Project/cognitiveos) — main project repository
-- [cognitive-os.org](https://cognitive-os.org) — project website
-- [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages model lifecycle
-- [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — inference API specification
+- [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — authoritative specs for raw-model, architecture, API, and security model
+- [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages the Wide Model and routes tool calls
 - [CognitiveOS Project](https://github.com/CognitiveOS-Project) — GitHub organization
 
 ## Contributing
