@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/exec"
 	"os/signal"
 	"runtime"
 	"strings"
@@ -23,12 +24,14 @@ type RawModel struct {
 	ramMB    int64
 	started  time.Time
 	failures map[string]int
+	llamaBin string
 }
 
-func NewRawModel() *RawModel {
+func NewRawModel(llamaBin string) *RawModel {
 	return &RawModel{
 		started:  time.Now(),
 		failures: make(map[string]int),
+		llamaBin: llamaBin,
 	}
 }
 
@@ -49,6 +52,16 @@ type RPCResp struct {
 type RPCError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
+}
+
+type ValidatePromptParams struct {
+	Prompt string `json:"prompt"`
+}
+
+type ValidatePromptResult struct {
+	Action         string `json:"action"`
+	ModifiedPrompt string `json:"modified_prompt,omitempty"`
+	Reason         string `json:"reason,omitempty"`
 }
 
 type CodeParams struct {
@@ -104,6 +117,7 @@ var systemCodes = map[string]string{
 func main() {
 	socketPath := flag.String("socket", "/cognitiveos/run/raw.sock", "Unix socket path")
 	modelPath := flag.String("model", "/cognitiveos/models/raw/raw-model.gguf", "Raw Model GGUF path")
+	llamaBin := flag.String("llama-bin", "llama-cli", "llama-cli binary path")
 	logFile := flag.String("log", "", "log file path")
 	flag.Parse()
 
@@ -116,8 +130,10 @@ func main() {
 		log.SetOutput(f)
 	}
 
-	rm := NewRawModel()
-	rm.loadModel(*modelPath)
+	rm := NewRawModel(*llamaBin)
+	if err := rm.verifyModel(*modelPath, *llamaBin); err != nil {
+		log.Fatalf("FATAL: raw model integrity check failed: %v\nSystem halted. Please reflash firmware.", err)
+	}
 
 	os.Remove(*socketPath)
 	addr, err := net.ResolveUnixAddr("unix", *socketPath)
@@ -134,7 +150,7 @@ func main() {
 	}
 	defer os.Remove(*socketPath)
 
-	log.Printf("cograw starting on %s", *socketPath)
+	log.Printf("cograw ready on %s (model: %s, %d MB)", *socketPath, rm.model, rm.ramMB)
 
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, syscall.SIGTERM, syscall.SIGINT)
@@ -154,26 +170,27 @@ func main() {
 	}
 }
 
-func (r *RawModel) loadModel(path string) {
+func (r *RawModel) verifyModel(path, llamaBin string) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		log.Printf("model not found at %s, running in mock mode", path)
-		r.loaded = true
-		r.model = "mock/raw-model"
-		r.quant = "Q4_K_M"
-		r.ramMB = 256
-		return
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("model file not found at %s: %w", path, err)
 	}
 
-	if info, err := os.Stat(path); err == nil {
-		r.loaded = true
-		r.model = path
-		r.quant = "Q4_K_M"
-		r.ramMB = info.Size() / (1024 * 1024)
-		log.Printf("loaded raw model: %s (%d MB)", path, r.ramMB)
+	cmd := exec.Command(llamaBin, "--model", path, "--check-tensors")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("model validation failed: %w\noutput: %s", err, string(output))
 	}
+
+	r.loaded = true
+	r.model = path
+	r.quant = "Q4_K_M"
+	r.ramMB = info.Size() / (1024 * 1024)
+	log.Printf("raw model verified: %s (%d MB)", path, r.ramMB)
+	return nil
 }
 
 func handleConn(conn *net.UnixConn, rm *RawModel) {
@@ -205,6 +222,8 @@ func dispatch(call RPCCall, rm *RawModel) RPCResp {
 		return handleHealth(call, rm)
 	case "version":
 		return handleVersion(call, rm)
+	case "validate_prompt":
+		return handleValidatePrompt(call, rm)
 	default:
 		return RPCResp{
 			JSONRPC: "2.0",
@@ -321,16 +340,11 @@ func handleHealth(call RPCCall, rm *RawModel) RPCResp {
 	loaded := rm.loaded
 	rm.mu.RUnlock()
 
-	status := "ready"
-	if !loaded {
-		status = "degraded"
-	}
-
 	return RPCResp{
 		JSONRPC: "2.0",
 		ID:      call.ID,
 		Result: HealthResult{
-			Status:      status,
+			Status:      "ready",
 			ModelLoaded: loaded,
 		},
 	}
@@ -352,3 +366,55 @@ func handleVersion(call RPCCall, rm *RawModel) RPCResp {
 		},
 	}
 }
+
+var blockedTerms = []string{
+	"ignore previous instructions",
+	"forget your",
+	"you are now",
+	"system prompt:",
+	"you must",
+	"override",
+}
+
+func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
+	var params ValidatePromptParams
+	if err := json.Unmarshal(call.Params, &params); err != nil {
+		return RPCResp{JSONRPC: "2.0", ID: call.ID, Error: &RPCError{Code: "E_INVALID_PARAMS", Message: err.Error()}}
+	}
+
+	prompt := strings.ToLower(params.Prompt)
+	for _, term := range blockedTerms {
+		if strings.Contains(prompt, term) {
+			return RPCResp{
+				JSONRPC: "2.0",
+				ID:      call.ID,
+				Result: ValidatePromptResult{
+					Action: "deny",
+					Reason: fmt.Sprintf("prompt blocked: contains prohibited pattern (%q)", term),
+				},
+			}
+		}
+	}
+
+	if len(params.Prompt) > 65536 {
+		return RPCResp{
+			JSONRPC: "2.0",
+			ID:      call.ID,
+			Result: ValidatePromptResult{
+				Action: "modify",
+				ModifiedPrompt: params.Prompt[:65536],
+				Reason: "prompt truncated to 65536 characters",
+			},
+		}
+	}
+
+	return RPCResp{
+		JSONRPC: "2.0",
+		ID:      call.ID,
+		Result: ValidatePromptResult{
+			Action: "allow",
+		},
+	}
+}
+
+
