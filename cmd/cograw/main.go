@@ -20,6 +20,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/CognitiveOS-Project/inference/internal/llm"
 )
 
 var registryPublicKeyPEM = []byte(`-----BEGIN PUBLIC KEY-----
@@ -35,7 +37,7 @@ type RawModel struct {
 	quant     string
 	started   time.Time
 	failStats map[string]*failTracker
-	llamaBin  string
+	backend   llm.Backend
 	pubKey    *rsa.PublicKey
 }
 
@@ -71,7 +73,7 @@ func (f *failTracker) isCooldown() (bool, time.Duration) {
 	return false, 0
 }
 
-func NewRawModel(llamaBin string) *RawModel {
+func NewRawModel(backend llm.Backend) *RawModel {
 	block, _ := pem.Decode(registryPublicKeyPEM)
 	var pubKey *rsa.PublicKey
 	if block != nil {
@@ -85,7 +87,7 @@ func NewRawModel(llamaBin string) *RawModel {
 	return &RawModel{
 		started:   time.Now(),
 		failStats: make(map[string]*failTracker),
-		llamaBin:  llamaBin,
+		backend:   backend,
 		pubKey:    pubKey,
 	}
 }
@@ -209,8 +211,8 @@ func main() {
 
 	initRawLog(*auditLogPath)
 
-	rm := NewRawModel(*llamaBin)
-	if err := rm.verifyModel(*modelPath, *llamaBin); err != nil {
+	rm := NewRawModel(newBackend())
+	if err := rm.verifyModel(*modelPath); err != nil {
 		log.Fatalf("FATAL: raw model integrity check failed: %v\nSystem halted. Please reflash firmware.", err)
 	}
 	logAudit("startup", fmt.Sprintf("raw model loaded: %s", *modelPath))
@@ -250,25 +252,17 @@ func main() {
 	}
 }
 
-func (r *RawModel) loadModel(path string) {
+func (r *RawModel) verifyModel(path string) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		log.Printf("model not found at %s, running in mock mode", path)
-		r.loaded = true
-		r.model = "mock/raw-model"
-		r.quant = "Q4_K_M"
-		r.ramMB = 256
-		return
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("model file not found at %s: %w", path, err)
 	}
 
-	if info, err := os.Stat(path); err == nil {
-		r.loaded = true
-		r.model = path
-		r.quant = "Q4_K_M"
-		r.ramMB = info.Size() / (1024 * 1024)
-		log.Printf("loaded raw model: %s (%d MB)", path, r.ramMB)
+	if _, err := r.backend.Load(path, &llm.LoadOptions{NumCtx: 1024}); err != nil {
+		return fmt.Errorf("model validation failed: %w", err)
 	}
 
 	r.loaded = true
@@ -580,13 +574,20 @@ Input: ` + input + `
 
 Classification:`
 
-	cmd := exec.Command(r.llamaBin, "--model", r.model, "--prompt", classifyInstruction, "--no-display-prompt", "-n", "10", "--temp", "0.0")
-	output, err := cmd.Output()
-	if err != nil {
-		return "", "", fmt.Errorf("llama-cli classify: %w", err)
+	req := llm.GenerateReq{
+		Prompt: classifyInstruction,
+		Options: map[string]interface{}{
+			"temperature": float64(0.0),
+			"num_predict": float64(10),
+		},
 	}
 
-	result := strings.TrimSpace(string(output))
+	resp, err := r.backend.Generate(req, nil)
+	if err != nil {
+		return "", "", fmt.Errorf("classify generation: %w", err)
+	}
+
+	result := strings.TrimSpace(resp.Response)
 	result = strings.ToUpper(result)
 
 	for _, word := range []string{"ALLOW", "DENY", "MODIFY"} {
