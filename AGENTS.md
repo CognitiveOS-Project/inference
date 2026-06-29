@@ -15,7 +15,7 @@ internal/server/         — HTTP server with all API handlers
   ├── backend_cgo.go     — CgoBackend constructor (build tag: cgo)
   └── backend_stub.go    — Stub fallback (build tag: !cgo)
 internal/llm/            — Backend interface + implementations
-  ├── llm.go             — Backend interface, MockBackend, CLIBackend (deprecated)
+  ├── llm.go             — Backend interface, MockBackend
   ├── bridge.go          — Single import "C" file wrapping llama.h API (build tag: cgo)
   ├── cgobackend.go      — CgoBackend: Backend impl calling bridge functions (build tag: cgo)
   └── loadopts.go        — LoadOptions{NumCtx, GPULayers, Threads}
@@ -51,8 +51,8 @@ CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 # Start with CGo llama.cpp bridge (production)
 ./bin/coginfer --backend cgo --models /cognitiveos/models
 
-# Start with deprecated llama-cli subprocess
-./bin/coginfer --backend cli --models /cognitiveos/models
+# Start with CGo llama.cpp bridge (production)
+./bin/coginfer --backend cgo --models /cognitiveos/models
 
 # Custom port and log file
 ./bin/coginfer --addr 127.0.0.1:11434 --log /cognitiveos/logs/inference.log
@@ -77,7 +77,7 @@ CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 
 - **mock**: Simulated token generation with delays, no external dependencies. Default for development. Always available.
 - **cgo**: In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and `vendor/llama.cpp/build/libllama.a`. Production default.
-- **cli** (deprecated): Shells out to `llama-cli` subprocess. Scheduled for removal in Phase 5.
+- **cgo**: In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and `vendor/llama.cpp/build/libllama.a`. Production default.
 
 #### Build Tags
 

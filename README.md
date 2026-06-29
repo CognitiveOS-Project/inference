@@ -11,7 +11,7 @@ CognitiveOS inference engine — local LLM runtime for both **Raw Model** (firmw
 cmd/coginfer             — Wide Model inference server (HTTP, Ollama-compatible)
 cmd/cograw               — Raw Model RPC server (Unix socket, JSON-RPC 2.0)
 internal/server/         — HTTP server with all API handlers
-internal/llm/            — Backend interface + implementations (mock, cli)
+internal/llm/            — Backend interface + implementations (mock, cgo)
 internal/model/          — Model scanning and .gguf metadata discovery
 ```
 
@@ -24,7 +24,11 @@ Exposes an Ollama-compatible HTTP API for the general-purpose Wide Model.
 #### Build
 
 ```bash
-go build -o bin/coginfer ./cmd/coginfer
+# With CGo (production — requires vendored llama.cpp build)
+CGO_ENABLED=1 go build -tags=cgo -o bin/coginfer ./cmd/coginfer
+
+# Without CGo (mock backend only, no llama.cpp needed)
+CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 ```
 
 #### Usage
@@ -33,8 +37,8 @@ go build -o bin/coginfer ./cmd/coginfer
 # Start with mock backend (no llama.cpp needed)
 ./bin/coginfer --backend mock --models /cognitiveos/models
 
-# Start with llama-cli backend (production)
-./bin/coginfer --backend cli --models /cognitiveos/models
+# Start with CGo llama.cpp backend (production)
+./bin/coginfer --backend cgo --models /cognitiveos/models
 
 # Custom port and log file
 ./bin/coginfer --addr 127.0.0.1:11434 --log /cognitiveos/logs/inference.log
@@ -58,7 +62,7 @@ go build -o bin/coginfer ./cmd/coginfer
 #### Backends
 
 - **mock** — Simulated token generation with delays. Default for development.
-- **cli** — Shells out to `llama-cli` for real inference on device.
+- **cgo** — In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and vendored llama.cpp build.
 
 ### cograw (Raw Model — Firmware Guardrail)
 
@@ -70,17 +74,14 @@ For the authoritative specification, see [raw-model.md](https://github.com/Cogni
 
 #### Build
 
-```bash
-go build -o bin/cograw ./cmd/cograw
-```
+Requires CGo and vendored llama.cpp. See [cograw build docs](cmd/cograw/) for details.
 
 #### Usage
 
 ```bash
 ./bin/cograw \
   --socket /cognitiveos/run/raw.sock \
-  --model /cognitiveos/models/raw/raw-model.gguf \
-  --llama-bin /usr/bin/llama-cli
+  --model /cognitiveos/models/raw/raw-model.gguf
 ```
 
 #### Flags
@@ -89,7 +90,6 @@ go build -o bin/cograw ./cmd/cograw
 |------|---------|-------------|
 | `--socket` | `/cognitiveos/run/raw.sock` | Unix socket path for JSON-RPC |
 | `--model` | `/cognitiveos/models/raw/raw-model.gguf` | Path to raw model GGUF file |
-| `--llama-bin` | `llama-cli` | Path to llama-cli for tensor integrity check |
 | `--log` | (stderr) | Log file path |
 
 #### RPC Methods
