@@ -11,7 +11,7 @@ import (
 func main() {
 	addr := flag.String("addr", "127.0.0.1:11434", "HTTP listen address")
 	modelDir := flag.String("models", "/cognitiveos/models", "model directory")
-	backend := flag.String("backend", "mock", "inference backend (mock, cli)")
+	backend := flag.String("backend", "mock", "inference backend (mock, cli, cgo)")
 	logFile := flag.String("log", "", "log file path")
 	flag.Parse()
 

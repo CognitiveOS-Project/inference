@@ -21,24 +21,24 @@ const (
 )
 
 type ModelInfo struct {
-	Name            string  `json:"name"`
-	Path            string  `json:"path"`
-	Quantization    string  `json:"quantization,omitempty"`
-	RAMUsageMB      int64   `json:"ram_usage_mb"`
-	VRAMUsageMB     int64   `json:"vram_usage_mb,omitempty"`
-	ContextWindow   int     `json:"context_window"`
-	ContextUsed     int     `json:"context_used"`
-	TokensPerSecond float64 `json:"tokens_per_second"`
-	State           State   `json:"-"`
+	Name            string    `json:"name"`
+	Path            string    `json:"path"`
+	Quantization    string    `json:"quantization,omitempty"`
+	RAMUsageMB      int64     `json:"ram_usage_mb"`
+	VRAMUsageMB     int64     `json:"vram_usage_mb,omitempty"`
+	ContextWindow   int       `json:"context_window"`
+	ContextUsed     int       `json:"context_used"`
+	TokensPerSecond float64   `json:"tokens_per_second"`
+	State           State     `json:"-"`
 	LoadedAt        time.Time `json:"-"`
 }
 
 type GenerateReq struct {
-	Model     string                 `json:"model"`
-	Prompt    string                 `json:"prompt"`
-	System    string                 `json:"system,omitempty"`
-	Options   map[string]interface{} `json:"options,omitempty"`
-	Stream    bool                   `json:"stream"`
+	Model   string                 `json:"model"`
+	Prompt  string                 `json:"prompt"`
+	System  string                 `json:"system,omitempty"`
+	Options map[string]interface{} `json:"options,omitempty"`
+	Stream  bool                   `json:"stream"`
 }
 
 type GenerateResp struct {
@@ -60,7 +60,7 @@ type ChatMsg struct {
 type Backend interface {
 	Name() string
 	Generate(req GenerateReq, onToken func(string)) (*GenerateResp, error)
-	Load(modelPath string) (*ModelInfo, error)
+	Load(modelPath string, opts *LoadOptions) (*ModelInfo, error)
 	Unload() error
 	IsLoaded() bool
 	LoadedModel() *ModelInfo
@@ -80,16 +80,20 @@ func NewMockBackend() *MockBackend {
 
 func (m *MockBackend) Name() string { return "mock" }
 
-func (m *MockBackend) Load(modelPath string) (*ModelInfo, error) {
+func (m *MockBackend) Load(modelPath string, opts *LoadOptions) (*ModelInfo, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.loaded = true
 	m.modelPath = modelPath
+	nCtx := 8192
+	if opts != nil && opts.NumCtx > 0 {
+		nCtx = opts.NumCtx
+	}
 	m.modelInfo = &ModelInfo{
 		Name:          modelPath,
 		Path:          modelPath,
 		RAMUsageMB:    128,
-		ContextWindow: 8192,
+		ContextWindow: nCtx,
 		State:         StateReady,
 		LoadedAt:      time.Now(),
 	}
@@ -127,7 +131,7 @@ func (m *MockBackend) Generate(req GenerateReq, onToken func(string)) (*Generate
 	}
 
 	respText := fmt.Sprintf(
-		"I understand your request: %s\n\nAs CognitiveOS AI, I can process this. (Mock mode — real inference would use llama.cpp with an actual GGUF model.)",
+		"I understand your request: %s\n\nAs CognitiveOS AI, I can process this. (Mock mode -- real inference would use llama.cpp with an actual GGUF model.)",
 		req.Prompt,
 	)
 
@@ -172,7 +176,7 @@ func NewCLIBackend(llamaBin string) *CLIBackend {
 
 func (c *CLIBackend) Name() string { return "cli" }
 
-func (c *CLIBackend) Load(modelPath string) (*ModelInfo, error) {
+func (c *CLIBackend) Load(modelPath string, opts *LoadOptions) (*ModelInfo, error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
