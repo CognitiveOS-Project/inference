@@ -25,11 +25,11 @@ type Server struct {
 }
 
 type StatusResponse struct {
-	Status       string          `json:"status"`
-	ModelsLoaded int             `json:"models_loaded"`
-	ActiveModel  *llm.ModelInfo  `json:"active_model,omitempty"`
-	RawModel     *rawModelInfo   `json:"raw_model,omitempty"`
-	Hardware     *hardwareInfo   `json:"hardware"`
+	Status       string         `json:"status"`
+	ModelsLoaded int            `json:"models_loaded"`
+	ActiveModel  *llm.ModelInfo `json:"active_model,omitempty"`
+	RawModel     *rawModelInfo  `json:"raw_model,omitempty"`
+	Hardware     *hardwareInfo  `json:"hardware"`
 }
 
 type rawModelInfo struct {
@@ -46,11 +46,11 @@ type hardwareInfo struct {
 }
 
 type capabilitiesResponse struct {
-	Backends             map[string]bool `json:"backends"`
-	PreferredBackend     string          `json:"preferred_backend"`
-	MaxModelSizeMB       int64           `json:"max_model_size_mb"`
-	SupportedQuants      []string        `json:"supported_quantizations"`
-	MaxContextWindow     int             `json:"max_context_window"`
+	Backends         map[string]bool `json:"backends"`
+	PreferredBackend string          `json:"preferred_backend"`
+	MaxModelSizeMB   int64           `json:"max_model_size_mb"`
+	SupportedQuants  []string        `json:"supported_quantizations"`
+	MaxContextWindow int             `json:"max_context_window"`
 }
 
 type negotiateRequest struct {
@@ -59,10 +59,10 @@ type negotiateRequest struct {
 }
 
 type negotiateResponse struct {
-	Status    string            `json:"status"`
-	ModelInfo *llm.ModelInfo    `json:"model_info,omitempty"`
-	Error     *negotiateError   `json:"error,omitempty"`
-	Alts      []negotiateAlt    `json:"alternatives,omitempty"`
+	Status    string          `json:"status"`
+	ModelInfo *llm.ModelInfo  `json:"model_info,omitempty"`
+	Error     *negotiateError `json:"error,omitempty"`
+	Alts      []negotiateAlt  `json:"alternatives,omitempty"`
 }
 
 type negotiateError struct {
@@ -77,17 +77,17 @@ type negotiateAlt struct {
 }
 
 type generateRequest struct {
-	Model     string                 `json:"model"`
-	Prompt    string                 `json:"prompt"`
-	System    string                 `json:"system,omitempty"`
-	Options   map[string]interface{} `json:"options,omitempty"`
-	Stream    bool                   `json:"stream"`
+	Model   string                 `json:"model"`
+	Prompt  string                 `json:"prompt"`
+	System  string                 `json:"system,omitempty"`
+	Options map[string]interface{} `json:"options,omitempty"`
+	Stream  bool                   `json:"stream"`
 }
 
 type chatRequest struct {
-	Model    string                 `json:"model"`
-	Messages []llm.ChatMsg          `json:"messages"`
-	Stream   bool                   `json:"stream"`
+	Model    string          `json:"model"`
+	Messages []llm.ChatMsg   `json:"messages"`
+	Stream   bool            `json:"stream"`
 	Options  map[string]interface{} `json:"options,omitempty"`
 }
 
@@ -115,8 +115,8 @@ type healthResponse struct {
 func New(modelDir string, backendType string) *Server {
 	var b llm.Backend
 	switch backendType {
-	case "cli":
-		b = llm.NewCLIBackend("llama-cli")
+	case "cgo":
+		b = newCgoBackend()
 	case "mock":
 		b = llm.NewMockBackend()
 	default:
@@ -160,6 +160,23 @@ func sendError(w http.ResponseWriter, status int, msg string) {
 	sendJSON(w, status, apiError{Error: msg})
 }
 
+func loadOptionsFromParams(params map[string]interface{}) *llm.LoadOptions {
+	if len(params) == 0 {
+		return nil
+	}
+	opts := llm.DefaultLoadOptions()
+	if v, ok := params["num_ctx"].(float64); ok {
+		opts.NumCtx = int(v)
+	}
+	if v, ok := params["gpu_layers"].(float64); ok {
+		opts.GPULayers = int(v)
+	}
+	if v, ok := params["threads"].(float64); ok {
+		opts.Threads = int(v)
+	}
+	return opts
+}
+
 // --- Handlers ---
 
 func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
@@ -178,7 +195,6 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Load model if not loaded
 	s.mu.Lock()
 	if !s.backend.IsLoaded() {
 		modelPath, err := s.models.Resolve(req.Model)
@@ -187,7 +203,8 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 			sendError(w, 404, err.Error())
 			return
 		}
-		if _, err := s.backend.Load(modelPath); err != nil {
+		loadOpts := loadOptionsFromParams(req.Options)
+		if _, err := s.backend.Load(modelPath, loadOpts); err != nil {
 			s.mu.Unlock()
 			sendError(w, 500, err.Error())
 			return
@@ -254,7 +271,6 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Build prompt from messages
 	var promptBuilder strings.Builder
 	for _, msg := range req.Messages {
 		promptBuilder.WriteString(fmt.Sprintf("%s: %s\n", msg.Role, msg.Content))
@@ -269,7 +285,8 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 			sendError(w, 404, err.Error())
 			return
 		}
-		if _, err := s.backend.Load(modelPath); err != nil {
+		loadOpts := loadOptionsFromParams(req.Options)
+		if _, err := s.backend.Load(modelPath, loadOpts); err != nil {
 			s.mu.Unlock()
 			sendError(w, 500, err.Error())
 			return
@@ -361,11 +378,10 @@ func (s *Server) handlePull(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// If path is provided and file exists, load it directly
 	if req.Path != "" {
 		if _, err := os.Stat(req.Path); err == nil {
 			s.mu.Lock()
-			mi, err := s.backend.Load(req.Path)
+			mi, err := s.backend.Load(req.Path, nil)
 			s.mu.Unlock()
 			if err != nil {
 				sendError(w, 500, err.Error())
@@ -380,7 +396,6 @@ func (s *Server) handlePull(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// In production, would download from registry here
 	sendError(w, 501, "E_INTERNAL: remote pull not implemented yet")
 }
 
@@ -391,15 +406,15 @@ func (s *Server) handlePs(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type psModel struct {
-		Name              string  `json:"name"`
-		Size              int64   `json:"size"`
-		RAMUsageMB        int64   `json:"ram_usage_mb"`
-		VRAMUsageMB       int64   `json:"vram_usage_mb"`
-		Processor         string  `json:"processor"`
-		GPULayers         int     `json:"gpu_layers"`
-		TokensPerSecond   float64 `json:"tokens_per_second"`
-		UptimeSeconds     int64   `json:"uptime_seconds"`
-		ContextUsagePct   int     `json:"context_usage_percent"`
+		Name            string  `json:"name"`
+		Size            int64   `json:"size"`
+		RAMUsageMB      int64   `json:"ram_usage_mb"`
+		VRAMUsageMB     int64   `json:"vram_usage_mb"`
+		Processor       string  `json:"processor"`
+		GPULayers       int     `json:"gpu_layers"`
+		TokensPerSecond float64 `json:"tokens_per_second"`
+		UptimeSeconds   int64   `json:"uptime_seconds"`
+		ContextUsagePct int     `json:"context_usage_percent"`
 	}
 
 	mi := s.backend.LoadedModel()
@@ -427,10 +442,9 @@ func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Accept body or query param
 	var req deleteRequest
 	if r.Method == http.MethodPost {
-		json.NewDecoder(r.Body).Decode(&req) // body is optional for DELETE
+		json.NewDecoder(r.Body).Decode(&req)
 	}
 
 	s.mu.Lock()
@@ -462,17 +476,14 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check file existence
 	info, err := os.Stat(modelPath)
 	if err != nil {
 		sendError(w, 404, "E_MODEL_NOT_FOUND: "+modelPath)
 		return
 	}
 
-	// Estimate RAM needed (rough: model file size * 1.2 for overhead)
 	estimatedRAM := (info.Size() * 12 / 10) / (1024 * 1024)
 
-	// Check available RAM
 	availableRAM := int64(4096)
 
 	if estimatedRAM > availableRAM {
@@ -490,8 +501,10 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	loadOpts := loadOptionsFromParams(req.Params)
+
 	s.mu.Lock()
-	mi, err := s.backend.Load(modelPath)
+	mi, err := s.backend.Load(modelPath, loadOpts)
 	s.mu.Unlock()
 	if err != nil {
 		sendError(w, 500, err.Error())
