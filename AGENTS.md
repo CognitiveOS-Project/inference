@@ -11,21 +11,35 @@ internal/server/         — HTTP server with all API handlers
   ├── /api/*             — Ollama-compatible: generate, chat, tags, pull, ps, delete
   ├── /cognitiveos/*     — Extensions: status, capabilities
   ├── /api/negotiate     — Resource negotiation
-  └── /health            — Healthcheck for cognitiveosd
+  ├── /health            — Healthcheck for cognitiveosd
+  ├── backend_cgo.go     — CgoBackend constructor (build tag: cgo)
+  └── backend_stub.go    — Stub fallback (build tag: !cgo)
 internal/llm/            — Backend interface + implementations
-  ├── mock               — Simulated generation (for testing/dev)
-  └── cli                — llama-cli subprocess (production)
+  ├── llm.go             — Backend interface, MockBackend, CLIBackend (deprecated)
+  ├── bridge.go          — Single import "C" file wrapping llama.h API (build tag: cgo)
+  ├── cgobackend.go      — CgoBackend: Backend impl calling bridge functions (build tag: cgo)
+  └── loadopts.go        — LoadOptions{NumCtx, GPULayers, Threads}
 internal/model/          — Model scanning and metadata (.gguf file discovery)
+vendor/llama.cpp/        — Git submodule, pinned to b9842
 ```
 
 ### coginfer (Wide Model)
 
-LLM inference server wrapping llama.cpp as a child process, exposing an Ollama-compatible HTTP API with CognitiveOS extensions.
+LLM inference server linking llama.cpp via a vendored CGo bridge, exposing an Ollama-compatible HTTP API with CognitiveOS extensions.
 
 #### Build
 
-```go
-go build -o bin/coginfer ./cmd/coginfer
+```bash
+# With CGo (production — requires cmake + gcc + submodule)
+cd vendor/llama.cpp && cmake -B build -DLLAMA_NO_ACCELERATE=1 \
+  -DLLAMA_STATIC=1 -DLLAMA_NATIVE=0 \
+  -DBUILD_SHARED_LIBS=0 -DLLAMA_BUILD_TESTS=0 \
+  -DLLAMA_BUILD_EXAMPLES=0 -DLLAMA_BUILD_SERVER=0
+cmake --build build --config Release -j$(nproc)
+cd ../.. && CGO_ENABLED=1 go build -tags=cgo -o bin/coginfer ./cmd/coginfer
+
+# Without CGo (CI, development — mock backend only)
+CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 ```
 
 #### Usage
@@ -34,7 +48,10 @@ go build -o bin/coginfer ./cmd/coginfer
 # Start with mock backend (default, no llama.cpp needed)
 ./bin/coginfer --backend mock --models /cognitiveos/models
 
-# Start with real llama-cli backend
+# Start with CGo llama.cpp bridge (production)
+./bin/coginfer --backend cgo --models /cognitiveos/models
+
+# Start with deprecated llama-cli subprocess
 ./bin/coginfer --backend cli --models /cognitiveos/models
 
 # Custom port and log file
@@ -58,8 +75,16 @@ go build -o bin/coginfer ./cmd/coginfer
 
 #### Backends
 
-- **mock**: Simulated token generation with delays, no external dependencies. Default for development.
-- **cli**: Shells out to `llama-cli` for real inference. Pass `--backend cli` in production.
+- **mock**: Simulated token generation with delays, no external dependencies. Default for development. Always available.
+- **cgo**: In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and `vendor/llama.cpp/build/libllama.a`. Production default.
+- **cli** (deprecated): Shells out to `llama-cli` subprocess. Scheduled for removal in Phase 5.
+
+#### Build Tags
+
+- `bridge.go`, `cgobackend.go`, `backend_cgo.go` — `//go:build cgo`
+- `backend_stub.go` — `//go:build !cgo`
+- CI runs `CGO_ENABLED=0`, excludes all CGo files automatically
+- `MockBackend` has no build tag — always available
 
 ### cograw (Raw Model — Firmware Guardrail)
 
@@ -86,12 +111,17 @@ JSON-RPC 2.0 over Unix socket at `/cognitiveos/run/raw.sock` (mode 0600, root-ow
 | `version` | Return version, model path, quantization |
 | `validate_prompt` | Guardrail check — allow/deny/modify prompts before they reach the Wide Model |
 
-**Full parameter/response schemas**: [product-specs/specs/raw-model.md#rpc-methods](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md#rpc-methods)
+**Full parameter/response schemas**: [product-specs/specs/raw-model.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md#rpc-methods)
 
 #### Build
 
-```go
-go build -o bin/cograw ./cmd/cograw
+```bash
+# With CGo (production)
+cd vendor/llama.cpp && cmake -B build ... && cmake --build build --config Release -j$(nproc)
+CGO_ENABLED=1 go build -tags=cgo -o bin/cograw ./cmd/cograw
+
+# Without CGo (mock mode, no real guardrail)
+CGO_ENABLED=0 go build -o bin/cograw ./cmd/cograw
 ```
 
 #### Flags
@@ -100,8 +130,8 @@ go build -o bin/cograw ./cmd/cograw
 |------|---------|-------------|
 | `--socket` | `/cognitiveos/run/raw.sock` | Unix socket path |
 | `--model` | `/cognitiveos/models/raw/raw-model.gguf` | Raw model GGUF path |
-| `--llama-bin` | `llama-cli` | llama-cli binary for tensor integrity check |
 | `--log` | (stderr) | Log file path |
+| `--audit-log` | `/cognitiveos/logs/raw/audit.log` | Audit log file path |
 
 #### Startup Order
 
