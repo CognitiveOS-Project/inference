@@ -115,8 +115,6 @@ type healthResponse struct {
 func New(modelDir string, backendType string) *Server {
 	var b llm.Backend
 	switch backendType {
-	case "cli":
-		b = llm.NewCLIBackend("llama-cli")
 	case "cgo":
 		b = newCgoBackend()
 	case "mock":
