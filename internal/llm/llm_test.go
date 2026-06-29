@@ -10,7 +10,7 @@ func TestMockBackendLoad(t *testing.T) {
 		t.Fatal("expected not loaded initially")
 	}
 
-	info, err := b.Load("/cognitiveos/models/test.gguf")
+	info, err := b.Load("/cognitiveos/models/test.gguf", nil)
 	if err != nil {
 		t.Fatalf("load: %v", err)
 	}
@@ -27,7 +27,7 @@ func TestMockBackendLoad(t *testing.T) {
 
 func TestMockBackendUnload(t *testing.T) {
 	b := NewMockBackend()
-	b.Load("/cognitiveos/models/test.gguf")
+	b.Load("/cognitiveos/models/test.gguf", nil)
 	if err := b.Unload(); err != nil {
 		t.Fatalf("unload: %v", err)
 	}
@@ -38,7 +38,7 @@ func TestMockBackendUnload(t *testing.T) {
 
 func TestMockBackendClose(t *testing.T) {
 	b := NewMockBackend()
-	b.Load("/cognitiveos/models/test.gguf")
+	b.Load("/cognitiveos/models/test.gguf", nil)
 	if err := b.Close(); err != nil {
 		t.Fatalf("close: %v", err)
 	}
@@ -57,7 +57,7 @@ func TestMockBackendGenerateWithoutLoad(t *testing.T) {
 
 func TestMockBackendGenerate(t *testing.T) {
 	b := NewMockBackend()
-	b.Load("/cognitiveos/models/test.gguf")
+	b.Load("/cognitiveos/models/test.gguf", nil)
 
 	resp, err := b.Generate(GenerateReq{Prompt: "What is 2+2?"}, nil)
 	if err != nil {
@@ -79,7 +79,7 @@ func TestMockBackendGenerate(t *testing.T) {
 
 func TestMockBackendGenerateStreaming(t *testing.T) {
 	b := NewMockBackend()
-	b.Load("/cognitiveos/models/test.gguf")
+	b.Load("/cognitiveos/models/test.gguf", nil)
 
 	var tokens []string
 	onToken := func(tok string) {
