@@ -3,8 +3,8 @@
 package llm
 
 /*
-#cgo LDFLAGS: -L${SRCDIR}/../../vendor/llama.cpp/build -llama -lm -lstdc++
-#cgo CFLAGS: -I${SRCDIR}/../../vendor/llama.cpp/include
+#cgo LDFLAGS: -L${SRCDIR}/../../vendor/llama.cpp/build -L${SRCDIR}/../../vendor/llama.cpp/build/src -lllama -lm -lstdc++
+#cgo CFLAGS: -I${SRCDIR}/../../vendor/llama.cpp/include -I${SRCDIR}/../../vendor/llama.cpp/ggml/include
 
 #include <stdlib.h>
 #include "llama.h"
