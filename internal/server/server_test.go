@@ -19,7 +19,7 @@ func startTestServer(t *testing.T) (*httptest.Server, string) {
 	dir := t.TempDir()
 	modelDir := filepath.Join(dir, "models")
 	_ = os.MkdirAll(filepath.Join(modelDir, "wide", "active"), 0755)
-	os.WriteFile(filepath.Join(modelDir, "test-model.gguf"), []byte("dummy-model-data"), 0644)
+	_ = os.WriteFile(filepath.Join(modelDir, "test-model.gguf"), []byte("dummy-model-data"), 0644)
 
 	s := New(modelDir, "mock")
 	mux := http.NewServeMux()
@@ -103,14 +103,14 @@ func TestCapabilities(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestTags(t *testing.T) {
 	ts, dir := startTestServer(t)
 	defer ts.Close()
 
-	os.WriteFile(filepath.Join(dir, "raw-model.gguf"), []byte("data"), 0644)
+	_ = os.WriteFile(filepath.Join(dir, "raw-model.gguf"), []byte("data"), 0644)
 
 	resp := request(t, ts.URL+"/api/tags", "GET", nil)
 	if resp.StatusCode != 200 {
@@ -153,7 +153,7 @@ func TestGenerateWithoutPrompt(t *testing.T) {
 	if resp.StatusCode == 200 {
 		t.Fatal("expected error for missing prompt")
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestChat(t *testing.T) {
@@ -185,7 +185,7 @@ func TestChatWithoutMessages(t *testing.T) {
 	if resp.StatusCode == 200 {
 		t.Fatal("expected error for no messages")
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestPs(t *testing.T) {
@@ -196,7 +196,7 @@ func TestPs(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestDelete(t *testing.T) {
@@ -207,7 +207,7 @@ func TestDelete(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestMethodNotAllowed(t *testing.T) {
@@ -218,7 +218,7 @@ func TestMethodNotAllowed(t *testing.T) {
 	if resp.StatusCode != 405 {
 		t.Fatalf("expected 405, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestGenerateStream(t *testing.T) {
@@ -243,7 +243,7 @@ func TestGenerateStream(t *testing.T) {
 	if err != nil {
 		t.Fatalf("do request: %v", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
@@ -276,7 +276,7 @@ func TestPullLocalFile(t *testing.T) {
 	defer ts.Close()
 
 	modelPath := filepath.Join(dir, "existing-model.gguf")
-	os.WriteFile(modelPath, []byte("data"), 0644)
+	_ = os.WriteFile(modelPath, []byte("data"), 0644)
 
 	resp := request(t, ts.URL+"/api/pull", "POST", map[string]interface{}{
 		"name": "existing-model",
@@ -285,5 +285,5 @@ func TestPullLocalFile(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }

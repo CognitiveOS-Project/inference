@@ -181,7 +181,7 @@ var rawLog *log.Logger
 
 func initRawLog(path string) {
 	dir := filepath.Dir(path)
-	os.MkdirAll(dir, 0755)
+	_ = os.MkdirAll(dir, 0755)
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0640)
 	if err != nil {
 		log.Printf("WARN: cannot open raw audit log %s: %v", path, err)
@@ -215,7 +215,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 		log.SetOutput(f)
 	}
 
@@ -227,7 +227,7 @@ func main() {
 	}
 	logAudit("startup", fmt.Sprintf("raw model loaded: %s", *modelPath))
 
-	os.Remove(*socketPath)
+	_ = os.Remove(*socketPath)
 	addr, err := net.ResolveUnixAddr("unix", *socketPath)
 	if err != nil {
 		log.Fatalf("resolve addr: %v", err)
@@ -240,7 +240,7 @@ func main() {
 	if err := os.Chmod(*socketPath, 0600); err != nil {
 		log.Fatalf("chmod: %v", err)
 	}
-	defer os.Remove(*socketPath)
+	defer func() { _ = os.Remove(*socketPath) }()
 
 	log.Printf("cograw ready on %s (model: %s)", *socketPath, rm.model)
 
@@ -250,7 +250,7 @@ func main() {
 	go func() {
 		<-sigCh
 		log.Println("shutting down")
-		listener.Close()
+		_ = listener.Close()
 	}()
 
 	for {
@@ -283,7 +283,7 @@ func (r *RawModel) verifyModel(path string) error {
 }
 
 func handleConn(conn *net.UnixConn, rm *RawModel) {
-	defer conn.Close()
+	defer func() { _ = conn.Close() }()
 
 	decoder := json.NewDecoder(conn)
 	encoder := json.NewEncoder(conn)
@@ -295,7 +295,7 @@ func handleConn(conn *net.UnixConn, rm *RawModel) {
 		}
 
 		resp := dispatch(call, rm)
-		encoder.Encode(resp)
+		_ = encoder.Encode(resp)
 	}
 }
 
@@ -499,12 +499,12 @@ func readMemAvailableMB() (int64, int64) {
 	for _, line := range lines {
 		if strings.HasPrefix(line, "MemTotal:") {
 			var kb int64
-			fmt.Sscanf(line, "MemTotal: %d kB", &kb)
+			_, _ = fmt.Sscanf(line, "MemTotal: %d kB", &kb)
 			totalMB = kb / 1024
 		}
 		if strings.HasPrefix(line, "MemAvailable:") {
 			var kb int64
-			fmt.Sscanf(line, "MemAvailable: %d kB", &kb)
+			_, _ = fmt.Sscanf(line, "MemAvailable: %d kB", &kb)
 			availableMB = kb / 1024
 		}
 	}
