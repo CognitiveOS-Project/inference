@@ -18,7 +18,7 @@ func startTestServer(t *testing.T) (*httptest.Server, string) {
 	t.Helper()
 	dir := t.TempDir()
 	modelDir := filepath.Join(dir, "models")
-	os.MkdirAll(filepath.Join(modelDir, "wide", "active"), 0755)
+	_ = os.MkdirAll(filepath.Join(modelDir, "wide", "active"), 0755)
 	os.WriteFile(filepath.Join(modelDir, "test-model.gguf"), []byte("dummy-model-data"), 0644)
 
 	s := New(modelDir, "mock")
@@ -40,7 +40,7 @@ func request(t *testing.T, url, method string, body interface{}) *http.Response 
 	t.Helper()
 	var buf bytes.Buffer
 	if body != nil {
-		json.NewEncoder(&buf).Encode(body)
+		_ = json.NewEncoder(&buf).Encode(body)
 	}
 	req, err := http.NewRequest(method, url, &buf)
 	if err != nil {
@@ -58,7 +58,7 @@ func request(t *testing.T, url, method string, body interface{}) *http.Response 
 
 func bodyString(t *testing.T, resp *http.Response) string {
 	t.Helper()
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	b, _ := io.ReadAll(resp.Body)
 	return strings.TrimSpace(string(b))
 }
@@ -69,7 +69,7 @@ func decodeMap(t *testing.T, resp *http.Response) testResp {
 	if err := json.NewDecoder(resp.Body).Decode(&r); err != nil {
 		t.Fatalf("decode: %v (body: %s)", err, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 	return r
 }
 
@@ -81,7 +81,7 @@ func TestHealth(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Fatalf("expected 200, got %d: %s", resp.StatusCode, bodyString(t, resp))
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestStatus(t *testing.T) {
@@ -231,7 +231,7 @@ func TestGenerateStream(t *testing.T) {
 		"stream": true,
 	}
 	var buf bytes.Buffer
-	json.NewEncoder(&buf).Encode(body)
+	_ = json.NewEncoder(&buf).Encode(body)
 
 	req, err := http.NewRequest("POST", ts.URL+"/api/generate", &buf)
 	if err != nil {

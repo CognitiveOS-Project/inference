@@ -519,10 +519,7 @@ func handleAudit(call RPCCall, rm *RawModel) RPCResp {
 
 	totalMB, freeMB := readMemAvailableMB()
 
-	allowed := true
-	if params.RequestedMB > 0 && params.RequestedMB > freeMB {
-		allowed = false
-	}
+	allowed := params.RequestedMB <= 0 || params.RequestedMB <= freeMB
 
 	return RPCResp{
 		JSONRPC: "2.0",

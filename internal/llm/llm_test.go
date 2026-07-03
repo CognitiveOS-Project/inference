@@ -57,7 +57,7 @@ func TestMockBackendGenerateWithoutLoad(t *testing.T) {
 
 func TestMockBackendGenerate(t *testing.T) {
 	b := NewMockBackend()
-	b.Load("/cognitiveos/models/test.gguf", nil)
+	_ = b.Load("/cognitiveos/models/test.gguf", nil)
 
 	resp, err := b.Generate(GenerateReq{Prompt: "What is 2+2?"}, nil)
 	if err != nil {
