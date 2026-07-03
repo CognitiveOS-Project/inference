@@ -20,7 +20,7 @@ internal/llm/            — Backend interface + implementations
   ├── cgobackend.go      — CgoBackend: Backend impl calling bridge functions (build tag: cgo)
   └── loadopts.go        — LoadOptions{NumCtx, GPULayers, Threads}
 internal/model/          — Model scanning and metadata (.gguf file discovery)
-vendor/llama.cpp/        — Git submodule, pinned to b9842
+vendor/llama.cpp/        — Manually cloned (NOT a git submodule — no `.gitmodules` file)
 ```
 
 ### coginfer (Wide Model)
@@ -30,26 +30,32 @@ LLM inference server linking llama.cpp via a vendored CGo bridge, exposing an Ol
 #### Build
 
 ```bash
-# With CGo (production — requires cmake + gcc + submodule)
+# With CGo (production — requires cmake + gcc + llama.cpp cloned into vendor/)
 cd vendor/llama.cpp && cmake -B build -DLLAMA_NO_ACCELERATE=1 \
   -DLLAMA_STATIC=1 -DLLAMA_NATIVE=0 \
   -DBUILD_SHARED_LIBS=0 -DLLAMA_BUILD_TESTS=0 \
-  -DLLAMA_BUILD_EXAMPLES=0 -DLLAMA_BUILD_SERVER=0
-cmake --build build --config Release -j$(nproc)
+  -DLLAMA_BUILD_EXAMPLES=0 -DLLAMA_BUILD_SERVER=0 \
+  -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY="$PWD/build"
+cmake --build build --target llama --config Release -j$(nproc)
 cd ../.. && CGO_ENABLED=1 go build -tags=cgo -o bin/coginfer ./cmd/coginfer
 
 # Without CGo (CI, development — mock backend only)
 CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 ```
 
+**CGo flags** (in `internal/llm/bridge.go`):
+- `-lllama` — NOT `-llama` (cmake target `llama` → `libllama.a`)
+- `-L.../build/src` — modern llama.cpp puts static archives in `build/src/`
+  (workaround: `CMAKE_ARCHIVE_OUTPUT_DIRECTORY` puts it in `build/`)
+- `-I.../ggml/include` — `llama.h` includes `ggml.h`, `ggml-cpu.h`, etc.
+- `CGO_LDFLAGS` is appended **before** `#cgo LDFLAGS` by Go toolchain;
+  `-L` in env var establishes search path before `-l` in source
+
 #### Usage
 
 ```bash
 # Start with mock backend (default, no llama.cpp needed)
 ./bin/coginfer --backend mock --models /cognitiveos/models
-
-# Start with CGo llama.cpp bridge (production)
-./bin/coginfer --backend cgo --models /cognitiveos/models
 
 # Start with CGo llama.cpp bridge (production)
 ./bin/coginfer --backend cgo --models /cognitiveos/models
@@ -77,13 +83,12 @@ CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 
 - **mock**: Simulated token generation with delays, no external dependencies. Default for development. Always available.
 - **cgo**: In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and `vendor/llama.cpp/build/libllama.a`. Production default.
-- **cgo**: In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and `vendor/llama.cpp/build/libllama.a`. Production default.
 
 #### Build Tags
 
 - `bridge.go`, `cgobackend.go`, `backend_cgo.go` — `//go:build cgo`
 - `backend_stub.go` — `//go:build !cgo`
-- CI runs `CGO_ENABLED=0`, excludes all CGo files automatically
+- CI runs `CGO_ENABLED=0` (Ubuntu defaults to `CGO_ENABLED=1`, which includes `cgo` tag — must be explicit)
 - `MockBackend` has no build tag — always available
 
 ### cograw (Raw Model — Firmware Guardrail)
