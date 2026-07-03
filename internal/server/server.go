@@ -231,7 +231,7 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 
 		onToken := func(token string) {
 			line, _ := json.Marshal(llm.GenerateResp{Response: token, Done: false})
-			fmt.Fprintf(w, "%s\n", line)
+			_, _ = fmt.Fprintf(w, "%s\n", line)
 			flusher.Flush()
 		}
 
@@ -242,7 +242,7 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 		}
 		resp.Done = true
 		line, _ := json.Marshal(resp)
-		fmt.Fprintf(w, "%s\n", line)
+		_, _ = fmt.Fprintf(w, "%s\n", line)
 		flusher.Flush()
 		return
 	}
@@ -273,7 +273,7 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 	var promptBuilder strings.Builder
 	for _, msg := range req.Messages {
-		promptBuilder.WriteString(fmt.Sprintf("%s: %s\n", msg.Role, msg.Content))
+		fmt.Fprintf(&promptBuilder, "%s: %s\n", msg.Role, msg.Content)
 	}
 	prompt := promptBuilder.String()
 
@@ -312,7 +312,7 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 		onToken := func(token string) {
 			line, _ := json.Marshal(llm.GenerateResp{Response: token, Done: false})
-			fmt.Fprintf(w, "%s\n", line)
+			_, _ = fmt.Fprintf(w, "%s\n", line)
 			flusher.Flush()
 		}
 
@@ -323,7 +323,7 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 		}
 		resp.Done = true
 		line, _ := json.Marshal(resp)
-		fmt.Fprintf(w, "%s\n", line)
+		_, _ = fmt.Fprintf(w, "%s\n", line)
 		flusher.Flush()
 		return
 	}
@@ -444,7 +444,7 @@ func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 
 	var req deleteRequest
 	if r.Method == http.MethodPost {
-		json.NewDecoder(r.Body).Decode(&req)
+		_ = json.NewDecoder(r.Body).Decode(&req)
 	}
 
 	s.mu.Lock()

@@ -97,7 +97,7 @@ func (m *Manager) Resolve(name string) (string, error) {
 
 	// Search recursively
 	var found string
-	filepath.Walk(m.ModelDir, func(path string, info os.FileInfo, err error) error {
+	_ = filepath.Walk(m.ModelDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil || found != "" {
 			return nil
 		}

@@ -63,8 +63,8 @@ func (c *CgoBackend) Load(modelPath string, opts *LoadOptions) (*ModelInfo, erro
 		return nil, fmt.Errorf("E_MODEL_NOT_FOUND: %s: %w", modelPath, err)
 	}
 	magic := make([]byte, 4)
-	f.Read(magic)
-	f.Close()
+	_, _ = f.Read(magic)
+	_ = f.Close()
 	if string(magic) != "GGUF" {
 		return nil, fmt.Errorf("E_MODEL_LOAD_FAILED: invalid GGUF magic bytes in %s", modelPath)
 	}

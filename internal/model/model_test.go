@@ -9,7 +9,7 @@ import (
 func TestManagerResolveAbsPath(t *testing.T) {
 	dir := t.TempDir()
 	modelPath := filepath.Join(dir, "test.gguf")
-	os.WriteFile(modelPath, []byte("dummy"), 0644)
+	_ = os.WriteFile(modelPath, []byte("dummy"), 0644)
 
 	m := NewManager(dir)
 	got, err := m.Resolve(modelPath)
@@ -31,9 +31,9 @@ func TestManagerResolveNotFound(t *testing.T) {
 
 func TestManagerList(t *testing.T) {
 	dir := t.TempDir()
-	os.MkdirAll(filepath.Join(dir, "wide", "active"), 0755)
-	os.WriteFile(filepath.Join(dir, "raw-model.gguf"), []byte("raw"), 0644)
-	os.WriteFile(filepath.Join(dir, "wide", "active", "gemma.gguf"), []byte("gemma"), 0644)
+	_ = os.MkdirAll(filepath.Join(dir, "wide", "active"), 0755)
+	_ = os.WriteFile(filepath.Join(dir, "raw-model.gguf"), []byte("raw"), 0644)
+	_ = os.WriteFile(filepath.Join(dir, "wide", "active", "gemma.gguf"), []byte("gemma"), 0644)
 
 	m := NewManager(dir)
 	models, err := m.List()
