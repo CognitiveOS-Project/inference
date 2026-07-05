@@ -115,6 +115,7 @@ JSON-RPC 2.0 over Unix socket at `/cognitiveos/run/raw.sock` (mode 0600, root-ow
 | `healthcheck` | Return running status |
 | `version` | Return version, model path, quantization |
 | `validate_prompt` | Guardrail check — allow/deny/modify prompts before they reach the Wide Model |
+| `validate_package_request` | Validate package management operations against OS rules and security conditions |
 
 **Full parameter/response schemas**: [product-specs/specs/raw-model.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md#rpc-methods)
 
