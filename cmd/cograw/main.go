@@ -153,10 +153,53 @@ type VersionResult struct {
 	Quant   string `json:"quant"`
 }
 
+type ValidatePromptParams struct {
+	Prompt string `json:"prompt"`
+}
+
+type ValidatePromptResult struct {
+	Action         string `json:"action"`
+	ModifiedPrompt string `json:"modified_prompt,omitempty"`
+	Reason         string `json:"reason,omitempty"`
+}
+
+type ValidatePackageRequestParams struct {
+	Operation        string `json:"operation"`
+	PackageName      string `json:"package_name"`
+	Version          string `json:"version,omitempty"`
+	ManifestMetadata *struct {
+		HasRawModel  bool   `json:"has_raw_model,omitempty"`
+		DiskSpaceMB  int64  `json:"disk_space_mb,omitempty"`
+		Registry     string `json:"registry,omitempty"`
+		IsCritical   bool   `json:"is_critical,omitempty"`
+	} `json:"manifest_metadata,omitempty"`
+}
+
+type ValidatePackageRequestResult struct {
+	Status  string `json:"status"`
+	Reason  string `json:"reason"`
+	Command string `json:"command"`
+}
+
 type AuditLogEntry struct {
 	Timestamp string `json:"timestamp"`
 	Event     string `json:"event"`
 	Details   string `json:"details,omitempty"`
+}
+
+var (
+	packageRateMu    sync.Mutex
+	packageRateCount int
+	packageRateStart time.Time
+)
+
+const maxPackageOps = 5
+const packageRateWindow = 5 * time.Minute
+
+var criticalPackages = map[string]bool{
+	"cognitiveosd": true,
+	"raw-model":    true,
+	"base-os":      true,
 }
 
 var systemCodes = map[string]string{
@@ -301,6 +344,10 @@ func dispatch(call RPCCall, rm *RawModel) RPCResp {
 		return handleHealth(call, rm)
 	case "version":
 		return handleVersion(call, rm)
+	case "validate_prompt":
+		return handleValidatePrompt(call, rm)
+	case "validate_package_request":
+		return handleValidatePackageRequest(call, rm)
 	default:
 		return RPCResp{
 			JSONRPC: "2.0",
@@ -557,6 +604,109 @@ func handleVersion(call RPCCall, rm *RawModel) RPCResp {
 			Version: fmt.Sprintf("cograw/1.0.0 (%s)", runtime.GOARCH),
 			Model:   model,
 			Quant:   quant,
+		},
+	}
+}
+
+func handleValidatePackageRequest(call RPCCall, rm *RawModel) RPCResp {
+	var params ValidatePackageRequestParams
+	if err := json.Unmarshal(call.Params, &params); err != nil {
+		return RPCResp{JSONRPC: "2.0", ID: call.ID, Error: &RPCError{Code: "E_INVALID_PARAMS", Message: err.Error()}}
+	}
+
+	if params.Operation == "" || params.PackageName == "" {
+		return RPCResp{JSONRPC: "2.0", ID: call.ID, Error: &RPCError{Code: "E_INVALID_PARAMS", Message: "operation and package_name are required"}}
+	}
+
+	// Rate limiting
+	packageRateMu.Lock()
+	if time.Since(packageRateStart) > packageRateWindow {
+		packageRateCount = 0
+		packageRateStart = time.Now()
+	}
+	packageRateCount++
+	if packageRateCount > maxPackageOps {
+		packageRateMu.Unlock()
+		logAudit("package_rate_limit",
+			fmt.Sprintf("operation=%s package=%s status=denied reason=rate_limit", params.Operation, params.PackageName))
+		return RPCResp{
+			JSONRPC: "2.0",
+			ID:      call.ID,
+			Result: ValidatePackageRequestResult{
+				Status:  "denied",
+				Reason:  fmt.Sprintf("rate limit exceeded (%d/%d ops per %d minutes)", packageRateCount-1, maxPackageOps, int(packageRateWindow.Minutes())),
+				Command: "",
+			},
+		}
+	}
+	packageRateMu.Unlock()
+
+	// Mutating operations (install, remove, update) have additional checks
+	isMutating := params.Operation == "install" || params.Operation == "remove" || params.Operation == "update"
+
+	if isMutating {
+		// Check if package is critical
+		if criticalPackages[params.PackageName] {
+			logAudit("package_denied",
+				fmt.Sprintf("operation=%s package=%s status=denied reason=critical", params.Operation, params.PackageName))
+			return RPCResp{
+				JSONRPC: "2.0",
+				ID:      call.ID,
+				Result: ValidatePackageRequestResult{
+					Status:  "denied",
+					Reason:  fmt.Sprintf("cannot %s critical system package: %s", params.Operation, params.PackageName),
+					Command: "",
+				},
+			}
+		}
+
+		// Check manifest metadata if available
+		if params.ManifestMetadata != nil {
+			if params.ManifestMetadata.HasRawModel {
+				logAudit("package_denied",
+					fmt.Sprintf("operation=%s package=%s status=denied reason=has_raw_model", params.Operation, params.PackageName))
+				return RPCResp{
+					JSONRPC: "2.0",
+					ID:      call.ID,
+					Result: ValidatePackageRequestResult{
+						Status:  "denied",
+						Reason:  "package contains a raw_model descriptor and cannot be auto-installed",
+						Command: "",
+					},
+				}
+			}
+
+			if params.ManifestMetadata.IsCritical {
+				logAudit("package_denied",
+					fmt.Sprintf("operation=%s package=%s status=denied reason=critical_metadata", params.Operation, params.PackageName))
+				return RPCResp{
+					JSONRPC: "2.0",
+					ID:      call.ID,
+					Result: ValidatePackageRequestResult{
+						Status:  "denied",
+						Reason:  fmt.Sprintf("cannot %s critical system package: %s", params.Operation, params.PackageName),
+						Command: "",
+					},
+				}
+			}
+		}
+	}
+
+	logAudit("package_approved",
+		fmt.Sprintf("operation=%s package=%s version=%s status=approved", params.Operation, params.PackageName, params.Version))
+
+	command := fmt.Sprintf("cpm %s %s", params.Operation, params.PackageName)
+	if params.Version != "" {
+		command += " --version " + params.Version
+	}
+
+	return RPCResp{
+		JSONRPC: "2.0",
+		ID:      call.ID,
+		Result: ValidatePackageRequestResult{
+			Status:  "approved",
+			Reason:  "",
+			Command: command,
 		},
 	}
 }
