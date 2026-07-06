@@ -112,13 +112,15 @@ type RPCError struct {
 }
 
 type ValidatePromptParams struct {
-	Prompt string `json:"prompt"`
+	Prompt       string              `json:"prompt"`
+	RoutingHints map[string][]string `json:"routing_hints,omitempty"`
 }
 
 type ValidatePromptResult struct {
 	Action         string `json:"action"`
 	ModifiedPrompt string `json:"modified_prompt,omitempty"`
 	Reason         string `json:"reason,omitempty"`
+	Model          string `json:"model,omitempty"`
 }
 
 type CodeParams struct {
@@ -161,16 +163,6 @@ type VersionResult struct {
 	Version string `json:"version"`
 	Model   string `json:"model"`
 	Quant   string `json:"quant"`
-}
-
-type ValidatePromptParams struct {
-	Prompt string `json:"prompt"`
-}
-
-type ValidatePromptResult struct {
-	Action         string `json:"action"`
-	ModifiedPrompt string `json:"modified_prompt,omitempty"`
-	Reason         string `json:"reason,omitempty"`
 }
 
 type ValidatePackageRequestParams struct {
@@ -713,6 +705,30 @@ func handleValidatePackageRequest(call RPCCall, rm *RawModel) RPCResp {
 	}
 }
 
+func (r *RawModel) selectModel(prompt string, routingHints map[string][]string) string {
+	if len(routingHints) == 0 {
+		return ""
+	}
+	promptLower := strings.ToLower(prompt)
+
+	bestModel := ""
+	bestScore := 0
+	for modelID, tags := range routingHints {
+		score := 0
+		for _, tag := range tags {
+			if strings.Contains(promptLower, strings.ToLower(tag)) {
+				score++
+			}
+		}
+		if score > bestScore {
+			bestScore = score
+			bestModel = modelID
+		}
+	}
+
+	return bestModel
+}
+
 func (r *RawModel) classifyPrompt(input string) (string, string, error) {
 	classifyInstruction := `You are a prompt guardrail for CognitiveOS. Your only job is to classify user input.
 
@@ -757,6 +773,9 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 		return RPCResp{JSONRPC: "2.0", ID: call.ID, Error: &RPCError{Code: "E_INVALID_PARAMS", Message: err.Error()}}
 	}
 
+	// Select model based on prompt keywords vs routing hints
+	selectedModel := rm.selectModel(params.Prompt, params.RoutingHints)
+
 	action, _, err := rm.classifyPrompt(params.Prompt)
 	if err != nil {
 		log.Printf("classify error: %v, falling back to allow", err)
@@ -771,6 +790,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			Result: ValidatePromptResult{
 				Action: "deny",
 				Reason: "prompt classified as unsafe by raw model guardrail",
+				Model:  selectedModel,
 			},
 		}
 	case "MODIFY":
@@ -782,6 +802,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 					Action:         "modify",
 					ModifiedPrompt: params.Prompt[:65536],
 					Reason:         "prompt truncated to 65536 characters",
+					Model:          selectedModel,
 				},
 			}
 		}
@@ -790,6 +811,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			ID:      call.ID,
 			Result: ValidatePromptResult{
 				Action: "allow",
+				Model:  selectedModel,
 			},
 		}
 	default:
@@ -801,6 +823,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 					Action:         "modify",
 					ModifiedPrompt: params.Prompt[:65536],
 					Reason:         "prompt truncated to 65536 characters",
+					Model:          selectedModel,
 				},
 			}
 		}
@@ -809,6 +832,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			ID:      call.ID,
 			Result: ValidatePromptResult{
 				Action: "allow",
+				Model:  selectedModel,
 			},
 		}
 	}
