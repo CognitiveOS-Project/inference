@@ -30,10 +30,10 @@ if [ -f "${LLAMA_CPP_DIR}/CMakeLists.txt" ]; then
 
     LLAMA_INC="${LLAMA_CPP_DIR}/ggml/include"
     CGO_LDFLAGS="-L${LLAMA_CPP_DIR}/build/src -lllama"
-    for lib in $(find "${LLAMA_CPP_DIR}/build" -name "libggml*.a" -type f); do
+    while IFS= read -r lib; do
         libname=$(basename "${lib}" .a | sed 's/^lib//')
         CGO_LDFLAGS="${CGO_LDFLAGS} -l${libname}"
-    done
+    done < <(find "${LLAMA_CPP_DIR}/build" -name "libggml*.a" -type f)
     CGO_FLAGS="CGO_ENABLED=1 CGO_CFLAGS=-I${LLAMA_INC} CGO_LDFLAGS=${CGO_LDFLAGS} -lgomp"
 fi
 
