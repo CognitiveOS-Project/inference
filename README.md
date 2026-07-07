@@ -1,17 +1,27 @@
-# inference — CogInfer
+# inference — CogInfer + CogRaw
 
-CognitiveOS inference engine — local LLM runtime for Raw Model and Wide Model execution. Exposes an Ollama-compatible HTTP API with CognitiveOS extensions.
+CognitiveOS inference engine — local LLM runtime for both **Raw Model** (firmware guardrail) and **Wide Model** (operational inference). Contains two binaries:
+
+- `coginfer` — Ollama-compatible HTTP inference server for the Wide Model
+- `cograw` — Root-level RPC server for the Raw Model (firmware GGUF guardrail)
 
 ## Architecture
 
 ```
-cmd/coginfer             — Entry point, flag parsing
+cmd/coginfer             — Wide Model inference server (HTTP, Ollama-compatible)
+cmd/cograw               — Raw Model RPC server (Unix socket, JSON-RPC 2.0)
 internal/server/         — HTTP server with all API handlers
 internal/llm/            — Backend interface + implementations (mock, cgo)
 internal/model/          — Model scanning and .gguf metadata discovery
 ```
 
-## Build
+## Binaries
+
+### coginfer (Wide Model)
+
+Exposes an Ollama-compatible HTTP API for the general-purpose Wide Model.
+
+#### Build
 
 ```bash
 # With CGo (production — requires vendored llama.cpp build)
@@ -21,7 +31,7 @@ CGO_ENABLED=1 go build -tags=cgo -o bin/coginfer ./cmd/coginfer
 CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 ```
 
-## Usage
+#### Usage
 
 ```bash
 # Start with mock backend (no llama.cpp needed)
@@ -34,7 +44,7 @@ CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 ./bin/coginfer --addr 127.0.0.1:11434 --log /cognitiveos/logs/inference.log
 ```
 
-## API
+#### API
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -49,7 +59,7 @@ CGO_ENABLED=0 go build -o bin/coginfer ./cmd/coginfer
 | GET  | `/cognitiveos/capabilities` | Hardware capabilities |
 | GET  | `/health` | Healthcheck |
 
-## Backends
+#### Backends
 
 - **mock** — Simulated token generation with delays. Default for development.
 - **cgo** — In-process llama.cpp via CGo bridge. Requires `CGO_ENABLED=1` and vendored llama.cpp build.
@@ -119,10 +129,8 @@ The raw model file is stored at `/cognitiveos/models/raw/raw-model.gguf` on a re
 
 ## Related
 
-- [CognitiveOS](https://github.com/CognitiveOS-Project/cognitiveos) — main project repository
-- [cognitive-os.org](https://cognitive-os.org) — project website
-- [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages model lifecycle
-- [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — inference API specification
+- [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — authoritative specs for raw-model, architecture, API, and security model
+- [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages the Wide Model and routes tool calls
 - [CognitiveOS Project](https://github.com/CognitiveOS-Project) — GitHub organization
 
 ## Contributing
