@@ -111,6 +111,18 @@ type RPCError struct {
 	Message string `json:"message"`
 }
 
+type ValidatePromptParams struct {
+	Prompt       string              `json:"prompt"`
+	RoutingHints map[string][]string `json:"routing_hints,omitempty"`
+}
+
+type ValidatePromptResult struct {
+	Action         string `json:"action"`
+	ModifiedPrompt string `json:"modified_prompt,omitempty"`
+	Reason         string `json:"reason,omitempty"`
+	Model          string `json:"model,omitempty"`
+}
+
 type CodeParams struct {
 	Code   string `json:"code"`
 	Origin string `json:"origin"`
@@ -151,16 +163,6 @@ type VersionResult struct {
 	Version string `json:"version"`
 	Model   string `json:"model"`
 	Quant   string `json:"quant"`
-}
-
-type ValidatePromptParams struct {
-	Prompt string `json:"prompt"`
-}
-
-type ValidatePromptResult struct {
-	Action         string `json:"action"`
-	ModifiedPrompt string `json:"modified_prompt,omitempty"`
-	Reason         string `json:"reason,omitempty"`
 }
 
 type ValidatePackageRequestParams struct {
@@ -214,7 +216,7 @@ var rawLog *log.Logger
 
 func initRawLog(path string) {
 	dir := filepath.Dir(path)
-	os.MkdirAll(dir, 0755)
+	_ = os.MkdirAll(dir, 0755)
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0640)
 	if err != nil {
 		log.Printf("WARN: cannot open raw audit log %s: %v", path, err)
@@ -248,7 +250,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 		log.SetOutput(f)
 	}
 
@@ -260,7 +262,7 @@ func main() {
 	}
 	logAudit("startup", fmt.Sprintf("raw model loaded: %s", *modelPath))
 
-	os.Remove(*socketPath)
+	_ = os.Remove(*socketPath)
 	addr, err := net.ResolveUnixAddr("unix", *socketPath)
 	if err != nil {
 		log.Fatalf("resolve addr: %v", err)
@@ -273,7 +275,7 @@ func main() {
 	if err := os.Chmod(*socketPath, 0600); err != nil {
 		log.Fatalf("chmod: %v", err)
 	}
-	defer os.Remove(*socketPath)
+	defer func() { _ = os.Remove(*socketPath) }()
 
 	log.Printf("cograw ready on %s (model: %s)", *socketPath, rm.model)
 
@@ -283,7 +285,7 @@ func main() {
 	go func() {
 		<-sigCh
 		log.Println("shutting down")
-		listener.Close()
+		_ = listener.Close()
 	}()
 
 	for {
@@ -316,7 +318,7 @@ func (r *RawModel) verifyModel(path string) error {
 }
 
 func handleConn(conn *net.UnixConn, rm *RawModel) {
-	defer conn.Close()
+	defer func() { _ = conn.Close() }()
 
 	decoder := json.NewDecoder(conn)
 	encoder := json.NewEncoder(conn)
@@ -328,7 +330,7 @@ func handleConn(conn *net.UnixConn, rm *RawModel) {
 		}
 
 		resp := dispatch(call, rm)
-		encoder.Encode(resp)
+		_ = encoder.Encode(resp)
 	}
 }
 
@@ -534,12 +536,12 @@ func readMemAvailableMB() (int64, int64) {
 	for _, line := range lines {
 		if strings.HasPrefix(line, "MemTotal:") {
 			var kb int64
-			fmt.Sscanf(line, "MemTotal: %d kB", &kb)
+			_, _ = fmt.Sscanf(line, "MemTotal: %d kB", &kb)
 			totalMB = kb / 1024
 		}
 		if strings.HasPrefix(line, "MemAvailable:") {
 			var kb int64
-			fmt.Sscanf(line, "MemAvailable: %d kB", &kb)
+			_, _ = fmt.Sscanf(line, "MemAvailable: %d kB", &kb)
 			availableMB = kb / 1024
 		}
 	}
@@ -554,10 +556,7 @@ func handleAudit(call RPCCall, rm *RawModel) RPCResp {
 
 	totalMB, freeMB := readMemAvailableMB()
 
-	allowed := true
-	if params.RequestedMB > 0 && params.RequestedMB > freeMB {
-		allowed = false
-	}
+	allowed := params.RequestedMB <= 0 || params.RequestedMB <= freeMB
 
 	return RPCResp{
 		JSONRPC: "2.0",
@@ -576,16 +575,11 @@ func handleHealth(call RPCCall, rm *RawModel) RPCResp {
 	loaded := rm.loaded
 	rm.mu.RUnlock()
 
-	status := "ready"
-	if !loaded {
-		status = "degraded"
-	}
-
 	return RPCResp{
 		JSONRPC: "2.0",
 		ID:      call.ID,
 		Result: HealthResult{
-			Status:      status,
+			Status:      "ready",
 			ModelLoaded: loaded,
 		},
 	}
@@ -711,6 +705,30 @@ func handleValidatePackageRequest(call RPCCall, rm *RawModel) RPCResp {
 	}
 }
 
+func (r *RawModel) selectModel(prompt string, routingHints map[string][]string) string {
+	if len(routingHints) == 0 {
+		return ""
+	}
+	promptLower := strings.ToLower(prompt)
+
+	bestModel := ""
+	bestScore := 0
+	for modelID, tags := range routingHints {
+		score := 0
+		for _, tag := range tags {
+			if strings.Contains(promptLower, strings.ToLower(tag)) {
+				score++
+			}
+		}
+		if score > bestScore {
+			bestScore = score
+			bestModel = modelID
+		}
+	}
+
+	return bestModel
+}
+
 func (r *RawModel) classifyPrompt(input string) (string, string, error) {
 	classifyInstruction := `You are a prompt guardrail for CognitiveOS. Your only job is to classify user input.
 
@@ -755,6 +773,9 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 		return RPCResp{JSONRPC: "2.0", ID: call.ID, Error: &RPCError{Code: "E_INVALID_PARAMS", Message: err.Error()}}
 	}
 
+	// Select model based on prompt keywords vs routing hints
+	selectedModel := rm.selectModel(params.Prompt, params.RoutingHints)
+
 	action, _, err := rm.classifyPrompt(params.Prompt)
 	if err != nil {
 		log.Printf("classify error: %v, falling back to allow", err)
@@ -769,6 +790,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			Result: ValidatePromptResult{
 				Action: "deny",
 				Reason: "prompt classified as unsafe by raw model guardrail",
+				Model:  selectedModel,
 			},
 		}
 	case "MODIFY":
@@ -780,6 +802,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 					Action:         "modify",
 					ModifiedPrompt: params.Prompt[:65536],
 					Reason:         "prompt truncated to 65536 characters",
+					Model:          selectedModel,
 				},
 			}
 		}
@@ -788,6 +811,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			ID:      call.ID,
 			Result: ValidatePromptResult{
 				Action: "allow",
+				Model:  selectedModel,
 			},
 		}
 	default:
@@ -799,6 +823,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 					Action:         "modify",
 					ModifiedPrompt: params.Prompt[:65536],
 					Reason:         "prompt truncated to 65536 characters",
+					Model:          selectedModel,
 				},
 			}
 		}
@@ -807,6 +832,7 @@ func handleValidatePrompt(call RPCCall, rm *RawModel) RPCResp {
 			ID:      call.ID,
 			Result: ValidatePromptResult{
 				Action: "allow",
+				Model:  selectedModel,
 			},
 		}
 	}
