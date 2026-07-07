@@ -31,10 +31,10 @@ $(BIN_DIR)/cognitiveos-inference $(BIN_DIR)/cograw: build-llama
 		go build -tags=cgo -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
 
 test:
-	go test ./... -v -count=1
+	CGO_ENABLED=0 go test ./... -v -count=1
 
 lint:
-	go vet ./...
+	CGO_ENABLED=0 go vet ./... 
 
 clean:
 	rm -rf $(BUILD_DIR)
