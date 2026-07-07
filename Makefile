@@ -34,6 +34,7 @@ test:
 	CGO_ENABLED=0 go test ./... -v -count=1
 
 lint:
+	shellcheck scripts/build.sh
 	CGO_ENABLED=0 go vet ./... 
 
 clean:
