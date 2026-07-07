@@ -6,9 +6,14 @@ SHELL := /bin/sh
 BUILD_DIR := build
 BIN_DIR := $(BUILD_DIR)/bin
 
-.PHONY: build test lint clean build-llama
+.PHONY: build build-mock test lint clean build-llama
 
 build: $(BIN_DIR)/cognitiveos-inference $(BIN_DIR)/cograw
+
+build-mock:
+	@mkdir -p $(BIN_DIR)
+	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cognitiveos-inference ./cmd/coginfer
+	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
 
 build-llama:
 	@if [ -f vendor/llama.cpp/CMakeLists.txt ] && [ ! -f vendor/llama.cpp/build/libllama.a ]; then
