@@ -30,6 +30,9 @@ LLM inference server linking llama.cpp via a vendored CGo bridge, exposing an Ol
 #### Build
 
 ```bash
+# Standard build (uses Makefile)
+make build
+
 # With CGo (production — requires cmake + gcc + llama.cpp cloned into vendor/)
 cd vendor/llama.cpp && cmake -B build -DLLAMA_NO_ACCELERATE=1 \
   -DLLAMA_STATIC=1 -DLLAMA_NATIVE=0 \
@@ -122,6 +125,9 @@ JSON-RPC 2.0 over Unix socket at `/cognitiveos/run/raw.sock` (mode 0600, root-ow
 #### Build
 
 ```bash
+# Standard build (uses Makefile, detects llama.cpp)
+make build
+
 # With CGo (production)
 cd vendor/llama.cpp && cmake -B build ... && cmake --build build --config Release -j$(nproc)
 CGO_ENABLED=1 go build -tags=cgo -o bin/cograw ./cmd/cograw
