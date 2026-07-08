@@ -1,7 +1,8 @@
 #!/bin/sh
-set -euo pipefail
+# shellcheck disable=SC3040,SC2044
+set -eu
 
-if ! command -v go &>/dev/null; then
+if ! command -v go >/dev/null 2>&1; then
     if [ ! -f /tmp/go/bin/go ]; then
         echo "Installing Go..."
         curl -sL https://go.dev/dl/go1.24.linux-amd64.tar.gz | tar -C /tmp -xz
@@ -30,10 +31,10 @@ if [ -f "${LLAMA_CPP_DIR}/CMakeLists.txt" ]; then
 
     LLAMA_INC="${LLAMA_CPP_DIR}/ggml/include"
     CGO_LDFLAGS="-L${LLAMA_CPP_DIR}/build/src -lllama"
-    while IFS= read -r lib; do
+    for lib in $(find "${LLAMA_CPP_DIR}/build" -name "libggml*.a" -type f); do
         libname=$(basename "${lib}" .a | sed 's/^lib//')
         CGO_LDFLAGS="${CGO_LDFLAGS} -l${libname}"
-    done < <(find "${LLAMA_CPP_DIR}/build" -name "libggml*.a" -type f)
+    done
     CGO_FLAGS="CGO_ENABLED=1 CGO_CFLAGS=-I${LLAMA_INC} CGO_LDFLAGS=${CGO_LDFLAGS} -lgomp"
 fi
 
