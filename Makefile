@@ -8,11 +8,11 @@ BIN_DIR := $(BUILD_DIR)/bin
 
 .PHONY: build build-mock test lint clean build-llama
 
-build: $(BIN_DIR)/cognitiveos-inference $(BIN_DIR)/cograw
+build: $(BIN_DIR)/coginfer $(BIN_DIR)/cograw
 
 build-mock:
 	@mkdir -p $(BIN_DIR)
-	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cognitiveos-inference ./cmd/coginfer
+	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/coginfer ./cmd/coginfer
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
 
 build-llama:
@@ -24,13 +24,13 @@ build-llama:
 		cmake --build build --config Release --target llama -j"$$(nproc)"
 	fi
 
-$(BIN_DIR)/cognitiveos-inference $(BIN_DIR)/cograw: build-llama
+$(BIN_DIR)/coginfer $(BIN_DIR)/cograw: build-llama
 	@mkdir -p $(BIN_DIR)
 	@echo "  building with CGo (llama.cpp)"
 	cd "$(CURDIR)"
 	CGO_ENABLED=1 CGO_CFLAGS="-Ivendor/llama.cpp/ggml/include" \
 		CGO_LDFLAGS="-Lvendor/llama.cpp/build/src -lllama $$(for lib in vendor/llama.cpp/build/libggml*.a; do libname=$$(basename "$$lib" .a | sed 's/^lib//'); echo -n " -l$$libname"; done) -lgomp" \
-		go build -tags=cgo -ldflags="-s -w" -o $(BIN_DIR)/cognitiveos-inference ./cmd/coginfer
+		go build -tags=cgo -ldflags="-s -w" -o $(BIN_DIR)/coginfer ./cmd/coginfer
 	CGO_ENABLED=1 CGO_CFLAGS="-Ivendor/llama.cpp/ggml/include" \
 		CGO_LDFLAGS="-Lvendor/llama.cpp/build/src -lllama $$(for lib in vendor/llama.cpp/build/libggml*.a; do libname=$$(basename "$$lib" .a | sed 's/^lib//'); echo -n " -l$$libname"; done) -lgomp" \
 		go build -tags=cgo -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
