@@ -62,14 +62,12 @@ func (f *failTracker) isCooldown() (bool, time.Duration) {
 		return false, 0
 	}
 	elapsed := time.Since(f.firstAt)
-	if elapsed < 10*time.Minute {
-		remaining := 5*time.Minute - (elapsed - 5*time.Minute)
-		if remaining < 0 {
-			remaining = 0
-		}
+	if elapsed < 5*time.Minute {
+		remaining := 5*time.Minute - elapsed
 		return true, remaining
 	}
 	f.count = 0
+	f.firstAt = time.Time{}
 	return false, 0
 }
 
@@ -239,6 +237,13 @@ func logAudit(event, details string) {
 }
 
 func main() {
+	for _, arg := range os.Args[1:] {
+		if arg == "--version" {
+			fmt.Println("cograw 1.0.0")
+			return
+		}
+	}
+
 	socketPath := flag.String("socket", "/cognitiveos/run/raw.sock", "Unix socket path")
 	modelPath := flag.String("model", "/cognitiveos/models/raw/raw-model.gguf", "Raw Model GGUF path")
 	logFile := flag.String("log", "", "log file path")

@@ -15,6 +15,8 @@ import (
 	"github.com/CognitiveOS-Project/inference/internal/model"
 )
 
+const idleTimeout = 5 * time.Minute
+
 type Server struct {
 	models    *model.Manager
 	backend   llm.Backend
@@ -22,6 +24,9 @@ type Server struct {
 	mu        sync.Mutex
 
 	backendType string
+
+	lastActivity time.Time
+	lastError    string
 }
 
 type StatusResponse struct {
@@ -41,8 +46,12 @@ type rawModelInfo struct {
 type hardwareInfo struct {
 	TotalRAMMB     int64 `json:"total_ram_mb"`
 	AvailableRAMMB int64 `json:"available_ram_mb"`
+	TotalVRAMMB    int64 `json:"total_vram_mb,omitempty"`
+	AvailableVRAMMB int64 `json:"available_vram_mb,omitempty"`
 	CPUCores       int   `json:"cpu_cores"`
 	CPUThreads     int   `json:"cpu_threads"`
+	NPUAvailable   bool  `json:"npu_available,omitempty"`
+	NPUMemoryMB    int64 `json:"npu_memory_mb,omitempty"`
 }
 
 type capabilitiesResponse struct {
@@ -101,15 +110,29 @@ type deleteRequest struct {
 	Model string `json:"model"`
 }
 
-type apiError struct {
-	Error string `json:"error"`
-}
-
 type healthResponse struct {
 	Status          string `json:"status"`
 	UptimeSeconds   int64  `json:"uptime_seconds"`
 	ModelsLoaded    int    `json:"models_loaded"`
+	LastError       string `json:"last_error,omitempty"`
 	RAMUsagePercent int    `json:"ram_usage_percent"`
+}
+
+type deleteResponse struct {
+	Status    string `json:"status"`
+	RAMFreedMB int64  `json:"ram_freed_mb,omitempty"`
+}
+
+type psModel struct {
+	Name            string  `json:"name"`
+	Size            int64   `json:"size"`
+	RAMUsageMB      int64   `json:"ram_usage_mb"`
+	VRAMUsageMB     int64   `json:"vram_usage_mb,omitempty"`
+	Processor       string  `json:"processor"`
+	GPULayers       int     `json:"gpu_layers"`
+	TokensPerSecond float64 `json:"tokens_per_second"`
+	UptimeSeconds   int64   `json:"uptime_seconds"`
+	ContextUsagePct int     `json:"context_usage_percent"`
 }
 
 func New(modelDir string, backendType string) *Server {
@@ -128,6 +151,7 @@ func New(modelDir string, backendType string) *Server {
 		backend:     b,
 		startTime:   time.Now(),
 		backendType: backendType,
+		lastActivity: time.Now(),
 	}
 }
 
@@ -144,8 +168,43 @@ func (s *Server) Listen(addr string) error {
 	mux.HandleFunc("/cognitiveos/capabilities", s.handleCapabilities)
 	mux.HandleFunc("/health", s.handleHealth)
 
+	go s.idleTimeoutLoop()
+
 	log.Printf("coginfer listening on %s (backend=%s)", addr, s.backendType)
 	return http.ListenAndServe(addr, mux)
+}
+
+func (s *Server) idleTimeoutLoop() {
+	ticker := time.NewTicker(30 * time.Second)
+	defer ticker.Stop()
+	for range ticker.C {
+		s.mu.Lock()
+		idleFor := time.Since(s.lastActivity)
+		loaded := s.backend.IsLoaded()
+		s.mu.Unlock()
+
+		if loaded && idleFor > idleTimeout {
+			log.Printf("idle timeout reached (%.0f seconds), unloading model", idleFor.Seconds())
+			if err := s.backend.Unload(); err != nil {
+				s.setLastError(fmt.Sprintf("idle unload failed: %v", err))
+				log.Printf("WARN: idle unload error: %v", err)
+			} else {
+				log.Printf("model unloaded due to idle timeout")
+			}
+		}
+	}
+}
+
+func (s *Server) touchActivity() {
+	s.mu.Lock()
+	s.lastActivity = time.Now()
+	s.mu.Unlock()
+}
+
+func (s *Server) setLastError(err string) {
+	s.mu.Lock()
+	s.lastError = err
+	s.mu.Unlock()
 }
 
 func sendJSON(w http.ResponseWriter, status int, v interface{}) {
@@ -157,7 +216,7 @@ func sendJSON(w http.ResponseWriter, status int, v interface{}) {
 }
 
 func sendError(w http.ResponseWriter, status int, msg string) {
-	sendJSON(w, status, apiError{Error: msg})
+	sendJSON(w, status, map[string]string{"error": msg})
 }
 
 func loadOptionsFromParams(params map[string]interface{}) *llm.LoadOptions {
@@ -177,11 +236,36 @@ func loadOptionsFromParams(params map[string]interface{}) *llm.LoadOptions {
 	return opts
 }
 
+func readMemMB() (int64, int64) {
+	totalMB := int64(8192)
+	availableMB := int64(4096)
+
+	data, err := os.ReadFile("/proc/meminfo")
+	if err != nil {
+		return totalMB, availableMB
+	}
+
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		if strings.HasPrefix(line, "MemTotal:") {
+			var kb int64
+			_, _ = fmt.Sscanf(line, "MemTotal: %d kB", &kb)
+			totalMB = kb / 1024
+		}
+		if strings.HasPrefix(line, "MemAvailable:") {
+			var kb int64
+			_, _ = fmt.Sscanf(line, "MemAvailable: %d kB", &kb)
+			availableMB = kb / 1024
+		}
+	}
+	return totalMB, availableMB
+}
+
 // --- Handlers ---
 
 func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -195,18 +279,33 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	s.touchActivity()
+
 	s.mu.Lock()
 	if !s.backend.IsLoaded() {
 		modelPath, err := s.models.Resolve(req.Model)
 		if err != nil {
 			s.mu.Unlock()
-			sendError(w, 404, err.Error())
+			errMsg := err.Error()
+			if strings.Contains(errMsg, "not found") {
+				s.setLastError(errMsg)
+				sendError(w, 404, "E_MODEL_NOT_FOUND: "+errMsg)
+			} else {
+				s.setLastError(errMsg)
+				sendError(w, 500, "E_INTERNAL: "+errMsg)
+			}
 			return
 		}
 		loadOpts := loadOptionsFromParams(req.Options)
 		if _, err := s.backend.Load(modelPath, loadOpts); err != nil {
 			s.mu.Unlock()
-			sendError(w, 500, err.Error())
+			s.setLastError(err.Error())
+			errMsg := err.Error()
+			if strings.Contains(errMsg, "E_MODEL_LOAD_FAILED") || strings.Contains(errMsg, "invalid GGUF") {
+				sendError(w, 500, errMsg)
+			} else {
+				sendError(w, 500, "E_MODEL_LOAD_FAILED: "+errMsg)
+			}
 			return
 		}
 	}
@@ -223,6 +322,7 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 	if req.Stream {
 		flusher, ok := w.(http.Flusher)
 		if !ok {
+			s.setLastError("streaming not supported")
 			sendError(w, 500, "E_INTERNAL: streaming not supported")
 			return
 		}
@@ -237,7 +337,8 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 
 		resp, err := s.backend.Generate(llmReq, onToken)
 		if err != nil {
-			sendError(w, 500, err.Error())
+			s.setLastError(err.Error())
+			sendError(w, 500, "E_INTERNAL: "+err.Error())
 			return
 		}
 		resp.Done = true
@@ -249,7 +350,8 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := s.backend.Generate(llmReq, nil)
 	if err != nil {
-		sendError(w, 500, err.Error())
+		s.setLastError(err.Error())
+		sendError(w, 500, "E_INTERNAL: "+err.Error())
 		return
 	}
 	sendJSON(w, 200, resp)
@@ -257,7 +359,7 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -271,6 +373,8 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	s.touchActivity()
+
 	var promptBuilder strings.Builder
 	for _, msg := range req.Messages {
 		fmt.Fprintf(&promptBuilder, "%s: %s\n", msg.Role, msg.Content)
@@ -282,13 +386,15 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 		modelPath, err := s.models.Resolve(req.Model)
 		if err != nil {
 			s.mu.Unlock()
-			sendError(w, 404, err.Error())
+			s.setLastError(err.Error())
+			sendError(w, 404, "E_MODEL_NOT_FOUND: "+err.Error())
 			return
 		}
 		loadOpts := loadOptionsFromParams(req.Options)
 		if _, err := s.backend.Load(modelPath, loadOpts); err != nil {
 			s.mu.Unlock()
-			sendError(w, 500, err.Error())
+			s.setLastError(err.Error())
+			sendError(w, 500, "E_MODEL_LOAD_FAILED: "+err.Error())
 			return
 		}
 	}
@@ -304,6 +410,7 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 	if req.Stream {
 		flusher, ok := w.(http.Flusher)
 		if !ok {
+			s.setLastError("streaming not supported")
 			sendError(w, 500, "E_INTERNAL: streaming not supported")
 			return
 		}
@@ -318,7 +425,8 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 		resp, err := s.backend.Generate(llmReq, onToken)
 		if err != nil {
-			sendError(w, 500, err.Error())
+			s.setLastError(err.Error())
+			sendError(w, 500, "E_INTERNAL: "+err.Error())
 			return
 		}
 		resp.Done = true
@@ -330,7 +438,8 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := s.backend.Generate(llmReq, nil)
 	if err != nil {
-		sendError(w, 500, err.Error())
+		s.setLastError(err.Error())
+		sendError(w, 500, "E_INTERNAL: "+err.Error())
 		return
 	}
 	sendJSON(w, 200, resp)
@@ -338,13 +447,14 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleTags(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
 	entries, err := s.models.List()
 	if err != nil {
-		sendError(w, 500, err.Error())
+		s.setLastError(err.Error())
+		sendError(w, 500, "E_INTERNAL: "+err.Error())
 		return
 	}
 
@@ -368,7 +478,7 @@ func (s *Server) handleTags(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handlePull(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -384,7 +494,8 @@ func (s *Server) handlePull(w http.ResponseWriter, r *http.Request) {
 			mi, err := s.backend.Load(req.Path, nil)
 			s.mu.Unlock()
 			if err != nil {
-				sendError(w, 500, err.Error())
+				s.setLastError(err.Error())
+				sendError(w, 500, "E_MODEL_LOAD_FAILED: "+err.Error())
 				return
 			}
 			sendJSON(w, 200, map[string]interface{}{
@@ -401,35 +512,32 @@ func (s *Server) handlePull(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handlePs(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
-	}
-
-	type psModel struct {
-		Name            string  `json:"name"`
-		Size            int64   `json:"size"`
-		RAMUsageMB      int64   `json:"ram_usage_mb"`
-		VRAMUsageMB     int64   `json:"vram_usage_mb"`
-		Processor       string  `json:"processor"`
-		GPULayers       int     `json:"gpu_layers"`
-		TokensPerSecond float64 `json:"tokens_per_second"`
-		UptimeSeconds   int64   `json:"uptime_seconds"`
-		ContextUsagePct int     `json:"context_usage_percent"`
 	}
 
 	mi := s.backend.LoadedModel()
 	var models []psModel
 	if mi != nil {
 		uptime := int64(time.Since(mi.LoadedAt).Seconds())
+		ctxPct := 0
+		if mi.ContextWindow > 0 {
+			ctxPct = mi.ContextUsed * 100 / mi.ContextWindow
+		}
+		processor := "CPU"
+		gpuLayers := 0
+		// Check if GPU layers configured — backend-specific
+
 		models = append(models, psModel{
 			Name:            mi.Name,
 			Size:            mi.RAMUsageMB * 1024 * 1024,
 			RAMUsageMB:      mi.RAMUsageMB,
 			VRAMUsageMB:     mi.VRAMUsageMB,
-			Processor:       "CPU",
+			Processor:       processor,
+			GPULayers:       gpuLayers,
 			TokensPerSecond: mi.TokensPerSecond,
 			UptimeSeconds:   uptime,
-			ContextUsagePct: 0,
+			ContextUsagePct: ctxPct,
 		})
 	}
 
@@ -438,29 +546,33 @@ func (s *Server) handlePs(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete && r.Method != http.MethodPost {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
-	var req deleteRequest
-	if r.Method == http.MethodPost {
-		_ = json.NewDecoder(r.Body).Decode(&req)
+	var ramFreed int64
+	if mi := s.backend.LoadedModel(); mi != nil {
+		ramFreed = mi.RAMUsageMB
 	}
 
 	s.mu.Lock()
 	err := s.backend.Unload()
 	s.mu.Unlock()
 	if err != nil {
-		sendError(w, 500, err.Error())
+		s.setLastError(err.Error())
+		sendError(w, 500, "E_INTERNAL: "+err.Error())
 		return
 	}
 
-	sendJSON(w, 200, map[string]string{"status": "ok"})
+	sendJSON(w, 200, deleteResponse{
+		Status:    "ok",
+		RAMFreedMB: ramFreed,
+	})
 }
 
 func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -478,13 +590,13 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 
 	info, err := os.Stat(modelPath)
 	if err != nil {
+		s.setLastError("model not found: " + modelPath)
 		sendError(w, 404, "E_MODEL_NOT_FOUND: "+modelPath)
 		return
 	}
 
 	estimatedRAM := (info.Size() * 12 / 10) / (1024 * 1024)
-
-	availableRAM := int64(4096)
+	_, availableRAM := readMemMB()
 
 	if estimatedRAM > availableRAM {
 		sendJSON(w, 200, negotiateResponse{
@@ -507,7 +619,8 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 	mi, err := s.backend.Load(modelPath, loadOpts)
 	s.mu.Unlock()
 	if err != nil {
-		sendError(w, 500, err.Error())
+		s.setLastError(err.Error())
+		sendError(w, 500, "E_MODEL_LOAD_FAILED: "+err.Error())
 		return
 	}
 
@@ -519,7 +632,7 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -532,9 +645,7 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 		modelsLoaded = 1
 	}
 
-	totalRAM := int64(8192)
-	availableRAM := int64(4096)
-
+	totalRAM, availableRAM := readMemMB()
 	cpuCores := runtime.NumCPU()
 
 	resp := StatusResponse{
@@ -559,7 +670,7 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleCapabilities(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		sendError(w, 405, "method not allowed")
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
 		return
 	}
 
@@ -598,10 +709,15 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 		modelsLoaded = 1
 	}
 
+	s.mu.Lock()
+	lastErr := s.lastError
+	s.mu.Unlock()
+
 	sendJSON(w, 200, healthResponse{
 		Status:          status,
 		UptimeSeconds:   int64(time.Since(s.startTime).Seconds()),
 		ModelsLoaded:    modelsLoaded,
+		LastError:       lastErr,
 		RAMUsagePercent: ramPct,
 	})
 }

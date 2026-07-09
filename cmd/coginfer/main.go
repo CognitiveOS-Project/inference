@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 
@@ -9,6 +10,13 @@ import (
 )
 
 func main() {
+	for _, arg := range os.Args[1:] {
+		if arg == "--version" {
+			fmt.Println("coginfer 1.0.0")
+			return
+		}
+	}
+
 	addr := flag.String("addr", "127.0.0.1:11434", "HTTP listen address")
 	modelDir := flag.String("models", "/cognitiveos/models", "model directory")
 	backend := flag.String("backend", "mock", "inference backend (mock, cgo)")
