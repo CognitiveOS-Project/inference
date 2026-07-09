@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../libllama-quantize-impl.a "CMakeFiles/llama-quantize-impl.dir/quantize.cpp.o"
-/usr/bin/ranlib ../../libllama-quantize-impl.a

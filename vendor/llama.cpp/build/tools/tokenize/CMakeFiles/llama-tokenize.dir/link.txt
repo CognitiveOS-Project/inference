@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/llama-tokenize.dir/link.d "CMakeFiles/llama-tokenize.dir/tokenize.cpp.o" -o ../../bin/llama-tokenize  ../../libllama-common.a ../../libllama.a ../../libggml.a -ldl ../../libggml-cpu.a ../../libggml-base.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a ../../libllama-common-base.a ../../libcpp-httplib.a

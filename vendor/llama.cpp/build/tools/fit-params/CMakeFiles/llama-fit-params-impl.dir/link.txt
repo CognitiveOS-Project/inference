@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../libllama-fit-params-impl.a "CMakeFiles/llama-fit-params-impl.dir/fit-params.cpp.o"
-/usr/bin/ranlib ../../libllama-fit-params-impl.a
