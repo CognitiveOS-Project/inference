@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../libllama-perplexity-impl.a "CMakeFiles/llama-perplexity-impl.dir/perplexity.cpp.o"
+/usr/bin/ranlib ../../libllama-perplexity-impl.a

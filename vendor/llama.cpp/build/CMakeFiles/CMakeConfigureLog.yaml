@@ -1,0 +1,2969 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/opencode/.local/bin/uname"
+      - "/usr/local/sbin/uname"
+      - "/usr/local/bin/uname"
+      - "/usr/sbin/uname"
+      - "/usr/bin/uname"
+      - "/sbin/uname"
+    found: "/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 6.12.76-linuxkit - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gmake"
+      - "make"
+      - "smake"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/opencode/.local/bin/gmake"
+      - "/usr/local/sbin/gmake"
+      - "/usr/local/bin/gmake"
+      - "/usr/sbin/gmake"
+    found: "/usr/bin/gmake"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:64 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER"
+    description: "C compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cc"
+      - "gcc"
+      - "cl"
+      - "bcc"
+      - "xlc"
+      - "icx"
+      - "clang"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/opencode/.local/bin/cc"
+      - "/usr/local/sbin/cc"
+      - "/usr/local/bin/cc"
+      - "/usr/sbin/cc"
+    found: "/usr/bin/cc"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:468 (find_file)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:506 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/"
+    found: "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /workspace/inference/vendor/llama.cpp/build/CMakeFiles/4.3.4/CompilerIdC/a.out
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/nm"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/objcopy"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/readelf"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/home/opencode/.local/bin/dlltool"
+      - "/usr/local/sbin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/bin/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    found: "/usr/bin/addr2line"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/home/opencode/.local/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/bin/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-15.2"
+      - "gcc-ar-15"
+      - "gcc-ar15"
+      - "gcc-ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ar-15.2"
+      - "/home/opencode/.local/bin/gcc-ar-15.2"
+      - "/usr/local/sbin/gcc-ar-15.2"
+      - "/usr/local/bin/gcc-ar-15.2"
+      - "/usr/sbin/gcc-ar-15.2"
+      - "/sbin/gcc-ar-15.2"
+      - "/bin/gcc-ar-15.2"
+      - "/usr/bin/gcc-ar-15"
+      - "/home/opencode/.local/bin/gcc-ar-15"
+      - "/usr/local/sbin/gcc-ar-15"
+      - "/usr/local/bin/gcc-ar-15"
+      - "/usr/sbin/gcc-ar-15"
+      - "/sbin/gcc-ar-15"
+      - "/bin/gcc-ar-15"
+      - "/usr/bin/gcc-ar15"
+      - "/home/opencode/.local/bin/gcc-ar15"
+      - "/usr/local/sbin/gcc-ar15"
+      - "/usr/local/bin/gcc-ar15"
+      - "/usr/sbin/gcc-ar15"
+      - "/sbin/gcc-ar15"
+      - "/bin/gcc-ar15"
+    found: "/usr/bin/gcc-ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-15.2"
+      - "gcc-ranlib-15"
+      - "gcc-ranlib15"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ranlib-15.2"
+      - "/home/opencode/.local/bin/gcc-ranlib-15.2"
+      - "/usr/local/sbin/gcc-ranlib-15.2"
+      - "/usr/local/bin/gcc-ranlib-15.2"
+      - "/usr/sbin/gcc-ranlib-15.2"
+      - "/sbin/gcc-ranlib-15.2"
+      - "/bin/gcc-ranlib-15.2"
+      - "/usr/bin/gcc-ranlib-15"
+      - "/home/opencode/.local/bin/gcc-ranlib-15"
+      - "/usr/local/sbin/gcc-ranlib-15"
+      - "/usr/local/bin/gcc-ranlib-15"
+      - "/usr/sbin/gcc-ranlib-15"
+      - "/sbin/gcc-ranlib-15"
+      - "/bin/gcc-ranlib-15"
+      - "/usr/bin/gcc-ranlib15"
+      - "/home/opencode/.local/bin/gcc-ranlib15"
+      - "/usr/local/sbin/gcc-ranlib15"
+      - "/usr/local/bin/gcc-ranlib15"
+      - "/usr/sbin/gcc-ranlib15"
+      - "/sbin/gcc-ranlib15"
+      - "/bin/gcc-ranlib15"
+    found: "/usr/bin/gcc-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "c++"
+      - "CC"
+      - "g++"
+      - "aCC"
+      - "cl"
+      - "bcc"
+      - "xlC"
+      - "icpx"
+      - "icx"
+      - "clang++"
+    candidate_directories:
+      - "/usr/bin/"
+    found: "/usr/bin/c++"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:468 (find_file)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:506 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/"
+    found: "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /workspace/inference/vendor/llama.cpp/build/CMakeFiles/4.3.4/CompilerIdCXX/a.out
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-15.2"
+      - "gcc-ar-15"
+      - "gcc-ar15"
+      - "gcc-ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ar-15.2"
+      - "/home/opencode/.local/bin/gcc-ar-15.2"
+      - "/usr/local/sbin/gcc-ar-15.2"
+      - "/usr/local/bin/gcc-ar-15.2"
+      - "/usr/sbin/gcc-ar-15.2"
+      - "/sbin/gcc-ar-15.2"
+      - "/bin/gcc-ar-15.2"
+      - "/usr/bin/gcc-ar-15"
+      - "/home/opencode/.local/bin/gcc-ar-15"
+      - "/usr/local/sbin/gcc-ar-15"
+      - "/usr/local/bin/gcc-ar-15"
+      - "/usr/sbin/gcc-ar-15"
+      - "/sbin/gcc-ar-15"
+      - "/bin/gcc-ar-15"
+      - "/usr/bin/gcc-ar15"
+      - "/home/opencode/.local/bin/gcc-ar15"
+      - "/usr/local/sbin/gcc-ar15"
+      - "/usr/local/bin/gcc-ar15"
+      - "/usr/sbin/gcc-ar15"
+      - "/sbin/gcc-ar15"
+      - "/bin/gcc-ar15"
+    found: "/usr/bin/gcc-ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-15.2"
+      - "gcc-ranlib-15"
+      - "gcc-ranlib15"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+    searched_directories:
+      - "/usr/bin/gcc-ranlib-15.2"
+      - "/home/opencode/.local/bin/gcc-ranlib-15.2"
+      - "/usr/local/sbin/gcc-ranlib-15.2"
+      - "/usr/local/bin/gcc-ranlib-15.2"
+      - "/usr/sbin/gcc-ranlib-15.2"
+      - "/sbin/gcc-ranlib-15.2"
+      - "/bin/gcc-ranlib-15.2"
+      - "/usr/bin/gcc-ranlib-15"
+      - "/home/opencode/.local/bin/gcc-ranlib-15"
+      - "/usr/local/sbin/gcc-ranlib-15"
+      - "/usr/local/bin/gcc-ranlib-15"
+      - "/usr/sbin/gcc-ranlib-15"
+      - "/sbin/gcc-ranlib-15"
+      - "/bin/gcc-ranlib-15"
+      - "/usr/bin/gcc-ranlib15"
+      - "/home/opencode/.local/bin/gcc-ranlib15"
+      - "/usr/local/sbin/gcc-ranlib15"
+      - "/usr/local/bin/gcc-ranlib15"
+      - "/usr/sbin/gcc-ranlib15"
+      - "/sbin/gcc-ranlib15"
+      - "/bin/gcc-ranlib15"
+    found: "/usr/bin/gcc-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_288b5/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_288b5.dir/build.make CMakeFiles/cmTC_288b5.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog'
+        Building C object CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -c /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/cc1 -quiet -v /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_288b5.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccCHiAnj.s
+        GNU C23 (Alpine 15.2.0) version 15.2.0 (x86_64-alpine-linux-musl)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/fortify
+         /usr/include
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include
+        End of search list.
+        Compiler executable checksum: 6a67626ce3924290a028a10a5edda80f
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/'
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o /tmp/ccCHiAnj.s
+        GNU assembler version 2.45.1 (x86_64-alpine-linux-musl) using BFD version (GNU Binutils) 2.45.1
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_288b5
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_288b5.dir/link.txt --verbose=1
+        /usr/bin/cc  -v -Wl,-v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -o cmTC_288b5
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_288b5' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_288b5.'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cceCMlHl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_288b5 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        collect2 version 15.2.0
+        /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cceCMlHl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_288b5 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        GNU ld (GNU Binutils) 2.45.1
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_288b5' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_288b5.'
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/fortify]
+          add: [/usr/include]
+          add: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        end of search list found
+        collapse include dir [/usr/include/fortify] ==> [/usr/include/fortify]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        implicit include dirs: [/usr/include/fortify;/usr/include;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_288b5/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_288b5.dir/build.make CMakeFiles/cmTC_288b5.dir/build]
+        ignore line: [gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jmklog']
+        ignore line: [Building C object CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -c /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/cc1 -quiet -v /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_288b5.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/ccCHiAnj.s]
+        ignore line: [GNU C23 (Alpine 15.2.0) version 15.2.0 (x86_64-alpine-linux-musl)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/fortify]
+        ignore line: [ /usr/include]
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 6a67626ce3924290a028a10a5edda80f]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o /tmp/ccCHiAnj.s]
+        ignore line: [GNU assembler version 2.45.1 (x86_64-alpine-linux-musl) using BFD version (GNU Binutils) 2.45.1]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_288b5]
+        ignore line: [/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_288b5.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/cc  -v -Wl -v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -o cmTC_288b5]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_288b5' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_288b5.']
+        link line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cceCMlHl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_288b5 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/cceCMlHl.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_288b5] ==> ignore
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lssp_nonshared] ==> lib [ssp_nonshared]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+        ignore line: [collect2 version 15.2.0]
+        ignore line: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cceCMlHl.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_288b5 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_288b5.dir/CMakeCCompilerABI.c.o -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+        linker tool for 'C': /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o] ==> [/usr/lib/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o] ==> [/usr/lib/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> [/usr/lib]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [ssp_nonshared;gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib/Scrt1.o;/usr/lib/crti.o;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o;/usr/lib/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0;/usr/x86_64-alpine-linux-musl/lib;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.45.1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_60c23/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_60c23.dir/build.make CMakeFiles/cmTC_60c23.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA'
+        Building CXX object CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -c /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/cc1plus -quiet -v -D_GNU_SOURCE /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_60c23.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/ccJiOKoD.s
+        GNU C++17 (Alpine 15.2.0) version 15.2.0 (x86_64-alpine-linux-musl)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/x86_64-alpine-linux-musl
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/backward
+         /usr/include/fortify
+         /usr/include
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include
+        End of search list.
+        Compiler executable checksum: c11a811b6e7e5bb82f926901317fcdde
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/'
+         /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccJiOKoD.s
+        GNU assembler version 2.45.1 (x86_64-alpine-linux-musl) using BFD version (GNU Binutils) 2.45.1
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_60c23
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60c23.dir/link.txt --verbose=1
+        /usr/bin/c++  -v -Wl,-v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_60c23
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_60c23' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60c23.'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cchhMALF.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_60c23 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lssp_nonshared -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        collect2 version 15.2.0
+        /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cchhMALF.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_60c23 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lssp_nonshared -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        GNU ld (GNU Binutils) 2.45.1
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_60c23' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60c23.'
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0]
+          add: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/x86_64-alpine-linux-musl]
+          add: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/backward]
+          add: [/usr/include/fortify]
+          add: [/usr/include]
+          add: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0] ==> [/usr/include/c++/15.2.0]
+        collapse include dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/x86_64-alpine-linux-musl] ==> [/usr/include/c++/15.2.0/x86_64-alpine-linux-musl]
+        collapse include dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/backward] ==> [/usr/include/c++/15.2.0/backward]
+        collapse include dir [/usr/include/fortify] ==> [/usr/include/fortify]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        collapse include dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        implicit include dirs: [/usr/include/c++/15.2.0;/usr/include/c++/15.2.0/x86_64-alpine-linux-musl;/usr/include/c++/15.2.0/backward;/usr/include/fortify;/usr/include;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_60c23/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_60c23.dir/build.make CMakeFiles/cmTC_60c23.dir/build]
+        ignore line: [gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-fJpMkA']
+        ignore line: [Building CXX object CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -c /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/cc1plus -quiet -v -D_GNU_SOURCE /home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_60c23.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/ccJiOKoD.s]
+        ignore line: [GNU C++17 (Alpine 15.2.0) version 15.2.0 (x86_64-alpine-linux-musl)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0]
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/x86_64-alpine-linux-musl]
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../include/c++/15.2.0/backward]
+        ignore line: [ /usr/include/fortify]
+        ignore line: [ /usr/include]
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: c11a811b6e7e5bb82f926901317fcdde]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/as -v --64 -o CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccJiOKoD.s]
+        ignore line: [GNU assembler version 2.45.1 (x86_64-alpine-linux-musl) using BFD version (GNU Binutils) 2.45.1]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_60c23]
+        ignore line: [/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60c23.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/c++  -v -Wl -v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_60c23]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_60c23' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60c23.']
+        link line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cchhMALF.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_60c23 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lssp_nonshared -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/cchhMALF.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_60c23] ==> ignore
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lssp_nonshared] ==> lib [ssp_nonshared]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+        ignore line: [collect2 version 15.2.0]
+        ignore line: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cchhMALF.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_60c23 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_60c23.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lssp_nonshared -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+        linker tool for 'CXX': /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o] ==> [/usr/lib/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o] ==> [/usr/lib/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> [/usr/lib]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [stdc++;m;ssp_nonshared;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/Scrt1.o;/usr/lib/crti.o;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o;/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o;/usr/lib/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0;/usr/x86_64-alpine-linux-musl/lib;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.45.1
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindGit.cmake:111 (find_program)"
+      - "cmake/git-vars.cmake:1 (find_package)"
+      - "CMakeLists.txt:26 (include)"
+    mode: "program"
+    variable: "GIT_EXECUTABLE"
+    description: "Git command line client"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "git"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/git"
+      - "/usr/local/sbin/git"
+      - "/usr/local/bin/git"
+      - "/usr/sbin/git"
+    found: "/usr/bin/git"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineASMCompiler.cmake:61 (_cmake_find_compiler)"
+      - "ggml/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_ASM_COMPILER"
+    description: "ASM compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "/usr/bin/cc"
+    candidate_directories:
+      - "/usr/bin/"
+    found: "/usr/bin/cc"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:1296 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "ggml/CMakeLists.txt:3 (project)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      cc (Alpine 15.2.0) 15.2.0
+      Copyright (C) 2025 Free Software Foundation, Inc.
+      This is free software; see the source for copying conditions.  There is NO
+      warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineASMCompiler.cmake:268 (include)"
+      - "ggml/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_ASM_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-"
+      - "gcc-ar-"
+      - "gcc-ar"
+      - "gcc-ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/bin/gcc-ar-"
+      - "/home/opencode/.local/bin/gcc-ar-"
+      - "/usr/local/sbin/gcc-ar-"
+      - "/usr/local/bin/gcc-ar-"
+      - "/usr/sbin/gcc-ar-"
+      - "/sbin/gcc-ar-"
+      - "/bin/gcc-ar-"
+      - "/usr/local/bin/gcc-ar-"
+      - "/usr/local/sbin/gcc-ar-"
+      - "/usr/local/gcc-ar-"
+      - "/usr/bin/gcc-ar-"
+      - "/usr/sbin/gcc-ar-"
+      - "/usr/gcc-ar-"
+      - "/bin/gcc-ar-"
+      - "/sbin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/gcc-ar-"
+      - "/usr/X11R6/bin/gcc-ar-"
+      - "/usr/X11R6/sbin/gcc-ar-"
+      - "/usr/X11R6/gcc-ar-"
+      - "/usr/pkg/bin/gcc-ar-"
+      - "/usr/pkg/sbin/gcc-ar-"
+      - "/usr/pkg/gcc-ar-"
+      - "/opt/bin/gcc-ar-"
+      - "/opt/sbin/gcc-ar-"
+      - "/opt/gcc-ar-"
+      - "/usr/bin/gcc-ar-"
+      - "/home/opencode/.local/bin/gcc-ar-"
+      - "/usr/local/sbin/gcc-ar-"
+      - "/usr/local/bin/gcc-ar-"
+      - "/usr/sbin/gcc-ar-"
+      - "/sbin/gcc-ar-"
+      - "/bin/gcc-ar-"
+      - "/usr/local/bin/gcc-ar-"
+      - "/usr/local/sbin/gcc-ar-"
+      - "/usr/local/gcc-ar-"
+      - "/usr/bin/gcc-ar-"
+      - "/usr/sbin/gcc-ar-"
+      - "/usr/gcc-ar-"
+      - "/bin/gcc-ar-"
+      - "/sbin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/gcc-ar-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/gcc-ar-"
+      - "/usr/X11R6/bin/gcc-ar-"
+      - "/usr/X11R6/sbin/gcc-ar-"
+      - "/usr/X11R6/gcc-ar-"
+      - "/usr/pkg/bin/gcc-ar-"
+      - "/usr/pkg/sbin/gcc-ar-"
+      - "/usr/pkg/gcc-ar-"
+      - "/opt/bin/gcc-ar-"
+      - "/opt/sbin/gcc-ar-"
+      - "/opt/gcc-ar-"
+    found: "/usr/bin/gcc-ar"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CMakeDetermineASMCompiler.cmake:268 (include)"
+      - "ggml/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_ASM_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-"
+      - "gcc-ranlib-"
+      - "gcc-ranlib"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/bin/gcc-ranlib-"
+      - "/home/opencode/.local/bin/gcc-ranlib-"
+      - "/usr/local/sbin/gcc-ranlib-"
+      - "/usr/local/bin/gcc-ranlib-"
+      - "/usr/sbin/gcc-ranlib-"
+      - "/sbin/gcc-ranlib-"
+      - "/bin/gcc-ranlib-"
+      - "/usr/local/bin/gcc-ranlib-"
+      - "/usr/local/sbin/gcc-ranlib-"
+      - "/usr/local/gcc-ranlib-"
+      - "/usr/bin/gcc-ranlib-"
+      - "/usr/sbin/gcc-ranlib-"
+      - "/usr/gcc-ranlib-"
+      - "/bin/gcc-ranlib-"
+      - "/sbin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/gcc-ranlib-"
+      - "/usr/X11R6/bin/gcc-ranlib-"
+      - "/usr/X11R6/sbin/gcc-ranlib-"
+      - "/usr/X11R6/gcc-ranlib-"
+      - "/usr/pkg/bin/gcc-ranlib-"
+      - "/usr/pkg/sbin/gcc-ranlib-"
+      - "/usr/pkg/gcc-ranlib-"
+      - "/opt/bin/gcc-ranlib-"
+      - "/opt/sbin/gcc-ranlib-"
+      - "/opt/gcc-ranlib-"
+      - "/usr/bin/gcc-ranlib-"
+      - "/home/opencode/.local/bin/gcc-ranlib-"
+      - "/usr/local/sbin/gcc-ranlib-"
+      - "/usr/local/bin/gcc-ranlib-"
+      - "/usr/sbin/gcc-ranlib-"
+      - "/sbin/gcc-ranlib-"
+      - "/bin/gcc-ranlib-"
+      - "/usr/local/bin/gcc-ranlib-"
+      - "/usr/local/sbin/gcc-ranlib-"
+      - "/usr/local/gcc-ranlib-"
+      - "/usr/bin/gcc-ranlib-"
+      - "/usr/sbin/gcc-ranlib-"
+      - "/usr/gcc-ranlib-"
+      - "/bin/gcc-ranlib-"
+      - "/sbin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/gcc-ranlib-"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/gcc-ranlib-"
+      - "/usr/X11R6/bin/gcc-ranlib-"
+      - "/usr/X11R6/sbin/gcc-ranlib-"
+      - "/usr/X11R6/gcc-ranlib-"
+      - "/usr/pkg/bin/gcc-ranlib-"
+      - "/usr/pkg/sbin/gcc-ranlib-"
+      - "/usr/pkg/gcc-ranlib-"
+      - "/opt/bin/gcc-ranlib-"
+      - "/opt/sbin/gcc-ranlib-"
+      - "/opt/gcc-ranlib-"
+    found: "/usr/bin/gcc-ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "ggml/CMakeLists.txt:13 (find_program)"
+    mode: "program"
+    variable: "GIT_EXE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "git"
+      - "git.exe"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/git"
+      - "/usr/local/sbin/git"
+      - "/usr/local/bin/git"
+      - "/usr/sbin/git"
+    found: "/usr/bin/git"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindThreads.cmake:160 (check_c_source_compiles)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindThreads.cmake:226 (_threads_check_libc)"
+      - "ggml/CMakeLists.txt:292 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/workspace/inference/vendor/llama.cpp/cmake/;/workspace/inference/vendor/llama.cpp/ggml/cmake/"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_56795/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_56795.dir/build.make CMakeFiles/cmTC_56795.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob'
+        Building C object CMakeFiles/cmTC_56795.dir/src.c.o
+        /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu11 -o CMakeFiles/cmTC_56795.dir/src.c.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob/src.c
+        Linking C executable cmTC_56795
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56795.dir/link.txt --verbose=1
+        /usr/bin/cc CMakeFiles/cmTC_56795.dir/src.c.o -o cmTC_56795
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-NlAPob'
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "ggml/src/CMakeLists.txt:69 (find_program)"
+    mode: "program"
+    variable: "GGML_CCACHE_FOUND"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ccache"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/ccache"
+      - "/usr/local/sbin/ccache"
+      - "/usr/local/bin/ccache"
+      - "/usr/sbin/ccache"
+      - "/usr/bin/ccache"
+      - "/sbin/ccache"
+      - "/bin/ccache"
+      - "/usr/local/bin/ccache"
+      - "/usr/local/sbin/ccache"
+      - "/usr/local/ccache"
+      - "/usr/bin/ccache"
+      - "/usr/sbin/ccache"
+      - "/usr/ccache"
+      - "/bin/ccache"
+      - "/sbin/ccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/ccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/ccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/ccache"
+      - "/usr/X11R6/bin/ccache"
+      - "/usr/X11R6/sbin/ccache"
+      - "/usr/X11R6/ccache"
+      - "/usr/pkg/bin/ccache"
+      - "/usr/pkg/sbin/ccache"
+      - "/usr/pkg/ccache"
+      - "/opt/bin/ccache"
+      - "/opt/sbin/ccache"
+      - "/opt/ccache"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "ggml/src/CMakeLists.txt:70 (find_program)"
+    mode: "program"
+    variable: "GGML_SCCACHE_FOUND"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "sccache"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/sccache"
+      - "/usr/local/sbin/sccache"
+      - "/usr/local/bin/sccache"
+      - "/usr/sbin/sccache"
+      - "/usr/bin/sccache"
+      - "/sbin/sccache"
+      - "/bin/sccache"
+      - "/usr/local/bin/sccache"
+      - "/usr/local/sbin/sccache"
+      - "/usr/local/sccache"
+      - "/usr/bin/sccache"
+      - "/usr/sbin/sccache"
+      - "/usr/sccache"
+      - "/bin/sccache"
+      - "/sbin/sccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/sccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/sccache"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sccache"
+      - "/usr/X11R6/bin/sccache"
+      - "/usr/X11R6/sbin/sccache"
+      - "/usr/X11R6/sccache"
+      - "/usr/pkg/bin/sccache"
+      - "/usr/pkg/sbin/sccache"
+      - "/usr/pkg/sccache"
+      - "/opt/bin/sccache"
+      - "/opt/sbin/sccache"
+      - "/opt/sccache"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:333 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/workspace/inference/vendor/llama.cpp/cmake/;/workspace/inference/vendor/llama.cpp/ggml/cmake/"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ba7e4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ba7e4.dir/build.make CMakeFiles/cmTC_ba7e4.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk'
+        Building C object CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o
+        /usr/bin/cc   -fopenmp -std=gnu11 -o CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk/OpenMPTryFlag.c
+        Linking C executable cmTC_ba7e4
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ba7e4.dir/link.txt --verbose=1
+        /usr/bin/cc  -fopenmp -v CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -o cmTC_ba7e4
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_ba7e4' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_ba7e4.'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccICbbiB.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_ba7e4 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -lgomp -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_ba7e4' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_ba7e4.'
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:377 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    message: |
+      Parsed C OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ba7e4/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_ba7e4.dir/build.make CMakeFiles/cmTC_ba7e4.dir/build]
+        ignore line: [gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk']
+        ignore line: [Building C object CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o]
+        ignore line: [/usr/bin/cc   -fopenmp -std=gnu11 -o CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-ehMehk/OpenMPTryFlag.c]
+        ignore line: [Linking C executable cmTC_ba7e4]
+        ignore line: [/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ba7e4.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/cc  -fopenmp -v CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -o cmTC_ba7e4]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_ba7e4' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_ba7e4.']
+        link line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccICbbiB.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_ba7e4 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o -lgomp -lssp_nonshared -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccICbbiB.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ba7e4] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [CMakeFiles/cmTC_ba7e4.dir/OpenMPTryFlag.c.o] ==> ignore
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lssp_nonshared] ==> lib [ssp_nonshared]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> [/usr/lib]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [gomp;ssp_nonshared;gcc;gcc_s;pthread;c;gcc;gcc_s]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0;/usr/x86_64-alpine-linux-musl/lib;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:395 (find_library)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    mode: "library"
+    variable: "OpenMP_gomp_LIBRARY"
+    description: "Path to the gomp library for OpenMP"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gomp"
+    candidate_directories:
+      - "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/"
+      - "/usr/x86_64-alpine-linux-musl/lib/"
+      - "/usr/lib/"
+      - "/lib/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/"
+      - "/usr/x86_64-alpine-linux-musl/lib/"
+    found: "/usr/lib/libgomp.so"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:395 (find_library)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    mode: "library"
+    variable: "OpenMP_pthread_LIBRARY"
+    description: "Path to the pthread library for OpenMP"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "pthread"
+    candidate_directories:
+      - "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/"
+      - "/usr/x86_64-alpine-linux-musl/lib/"
+      - "/usr/lib/"
+      - "/lib/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+    searched_directories:
+      - "/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/"
+      - "/usr/x86_64-alpine-linux-musl/lib/"
+    found: "/usr/lib/libpthread.a"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:333 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/workspace/inference/vendor/llama.cpp/cmake/;/workspace/inference/vendor/llama.cpp/ggml/cmake/"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f5bf0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_f5bf0.dir/build.make CMakeFiles/cmTC_f5bf0.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD'
+        Building CXX object CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD/OpenMPTryFlag.cpp
+        Linking CXX executable cmTC_f5bf0
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5bf0.dir/link.txt --verbose=1
+        /usr/bin/c++  -fopenmp -v CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -o cmTC_f5bf0
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper
+        Target: x86_64-alpine-linux-musl
+        Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c,c++,d,objc,go,fortran,ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0'
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 15.2.0 (Alpine 15.2.0) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_f5bf0' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_f5bf0.'
+         /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccCaLKNI.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_f5bf0 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lssp_nonshared -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_f5bf0' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_f5bf0.'
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:377 (message)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    message: |
+      Parsed CXX OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD']
+        ignore line: []
+        ignore line: [Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f5bf0/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_f5bf0.dir/build.make CMakeFiles/cmTC_f5bf0.dir/build]
+        ignore line: [gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD']
+        ignore line: [Building CXX object CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o]
+        ignore line: [/usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-DBeioD/OpenMPTryFlag.cpp]
+        ignore line: [Linking CXX executable cmTC_f5bf0]
+        ignore line: [/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5bf0.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/c++  -fopenmp -v CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -o cmTC_f5bf0]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-alpine-linux-musl]
+        ignore line: [Configured with: /home/buildozer/aports/main/gcc/src/gcc-15.2.0/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --build=x86_64-alpine-linux-musl --host=x86_64-alpine-linux-musl --target=x86_64-alpine-linux-musl --enable-checking=release --disable-cet --disable-fixed-point --disable-libstdcxx-pch --disable-multilib --disable-nls --disable-werror --disable-symvers --enable-__cxa_atexit --enable-default-pie --enable-default-ssp --enable-languages=c c++ d objc go fortran ada --enable-link-serialization=2 --enable-linker-build-id --disable-libssp --enable-libsanitizer --enable-shared --enable-threads --enable-tls --with-bugurl=https://gitlab.alpinelinux.org/alpine/aports/-/issues --with-system-zlib --with-linker-hash-style=gnu --with-pkgversion='Alpine 15.2.0']
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 15.2.0 (Alpine 15.2.0) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/libexec/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/:/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_f5bf0' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' 'cmTC_f5bf0.']
+        link line: [ /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2 -plugin /usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccCaLKNI.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 --as-needed -dynamic-linker /lib/ld-musl-x86_64.so.1 -pie -z now -o cmTC_f5bf0 /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0 -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib -L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../.. -L/lib -L/usr/lib CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lssp_nonshared -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/crtendS.o /usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-alpine-linux-musl/15.2.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccCaLKNI.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-musl-x86_64.so.1] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_f5bf0] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib]
+          arg [-L/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [CMakeFiles/cmTC_f5bf0.dir/OpenMPTryFlag.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lssp_nonshared] ==> lib [ssp_nonshared]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0] ==> [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib/../lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../../../x86_64-alpine-linux-musl/lib] ==> [/usr/x86_64-alpine-linux-musl/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0/../../..] ==> [/usr/lib]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gomp;ssp_nonshared;gcc_s;gcc;pthread;c;gcc_s;gcc]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-alpine-linux-musl/15.2.0;/usr/x86_64-alpine-linux-musl/lib;/usr/lib;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:574 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:714 (_OPENMP_GET_SPEC_DATE)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    description: "Detecting C OpenMP version"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/workspace/inference/vendor/llama.cpp/cmake/;/workspace/inference/vendor/llama.cpp/ggml/cmake/"
+    buildResult:
+      variable: "OpenMP_SPECTEST_C_"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0033e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0033e.dir/build.make CMakeFiles/cmTC_0033e.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK'
+        Building C object CMakeFiles/cmTC_0033e.dir/OpenMPCheckVersion.c.o
+        /usr/bin/cc   -fopenmp -std=gnu11 -o CMakeFiles/cmTC_0033e.dir/OpenMPCheckVersion.c.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK/OpenMPCheckVersion.c
+        Linking C executable cmTC_0033e
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0033e.dir/link.txt --verbose=1
+        /usr/bin/cc  -fopenmp CMakeFiles/cmTC_0033e.dir/OpenMPCheckVersion.c.o -o cmTC_0033e
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-CLJGJK'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:574 (try_compile)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenMP.cmake:714 (_OPENMP_GET_SPEC_DATE)"
+      - "ggml/src/CMakeLists.txt:226 (find_package)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP"
+      binary: "/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/workspace/inference/vendor/llama.cpp/cmake/;/workspace/inference/vendor/llama.cpp/ggml/cmake/"
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP'
+        
+        Run Build Command(s): /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_aba23/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_aba23.dir/build.make CMakeFiles/cmTC_aba23.dir/build
+        gmake[1]: Entering directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP'
+        Building CXX object CMakeFiles/cmTC_aba23.dir/OpenMPCheckVersion.cpp.o
+        /usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_aba23.dir/OpenMPCheckVersion.cpp.o -c /workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP/OpenMPCheckVersion.cpp
+        Linking CXX executable cmTC_aba23
+        /home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aba23.dir/link.txt --verbose=1
+        /usr/bin/c++  -fopenmp CMakeFiles/cmTC_aba23.dir/OpenMPCheckVersion.cpp.o -o cmTC_aba23
+        gmake[1]: Leaving directory '/workspace/inference/vendor/llama.cpp/build/CMakeFiles/CMakeScratch/TryCompile-jIkAgP'
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindPkgConfig.cmake:517 (find_program)"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenSSL.cmake:295 (find_package)"
+      - "vendor/cpp-httplib/CMakeLists.txt:127 (find_package)"
+    mode: "program"
+    variable: "PKG_CONFIG_EXECUTABLE"
+    description: "pkg-config executable"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "pkg-config"
+      - "pkgconf"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/bin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/sbin/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/pkg-config"
+      - "/home/opencode/.local/bin/pkgconf"
+      - "/usr/local/sbin/pkg-config"
+      - "/usr/local/sbin/pkgconf"
+      - "/usr/local/bin/pkg-config"
+      - "/usr/local/bin/pkgconf"
+      - "/usr/sbin/pkg-config"
+      - "/usr/sbin/pkgconf"
+    found: "/usr/bin/pkg-config"
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenSSL.cmake:370 (find_path)"
+      - "vendor/cpp-httplib/CMakeLists.txt:127 (find_package)"
+    mode: "path"
+    variable: "OPENSSL_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "openssl/ssl.h"
+    candidate_directories:
+      - "/home/opencode/.local/bin/include/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/sbin/include/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/include/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/include/"
+      - "/usr/sbin/"
+      - "/usr/bin/include/"
+      - "/usr/bin/"
+      - "/sbin/include/"
+      - "/sbin/"
+      - "/bin/include/"
+      - "/bin/"
+      - "/usr/local/include/include/"
+      - "/usr/local/include/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/usr/include/include/"
+      - "/usr/include/"
+      - "/usr/include/"
+      - "/usr/"
+      - "/include/include/"
+      - "/include/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/include/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/usr/X11R6/include/include/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/include/include/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/"
+      - "/opt/include/include/"
+      - "/opt/include/"
+      - "/opt/include/"
+      - "/opt/"
+      - "/usr/include/X11/include/"
+      - "/usr/include/X11/"
+    searched_directories:
+      - "/home/opencode/.local/bin/include/openssl/ssl.h"
+      - "/home/opencode/.local/bin/openssl/ssl.h"
+      - "/usr/local/sbin/include/openssl/ssl.h"
+      - "/usr/local/sbin/openssl/ssl.h"
+      - "/usr/local/bin/include/openssl/ssl.h"
+      - "/usr/local/bin/openssl/ssl.h"
+      - "/usr/sbin/include/openssl/ssl.h"
+      - "/usr/sbin/openssl/ssl.h"
+      - "/usr/bin/include/openssl/ssl.h"
+      - "/usr/bin/openssl/ssl.h"
+      - "/sbin/include/openssl/ssl.h"
+      - "/sbin/openssl/ssl.h"
+      - "/bin/include/openssl/ssl.h"
+      - "/bin/openssl/ssl.h"
+      - "/usr/local/include/include/openssl/ssl.h"
+      - "/usr/local/include/openssl/ssl.h"
+      - "/usr/local/include/openssl/ssl.h"
+      - "/usr/local/openssl/ssl.h"
+      - "/usr/include/include/openssl/ssl.h"
+      - "/usr/include/openssl/ssl.h"
+      - "/usr/include/openssl/ssl.h"
+      - "/usr/openssl/ssl.h"
+      - "/include/include/openssl/ssl.h"
+      - "/include/openssl/ssl.h"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/include/openssl/ssl.h"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/openssl/ssl.h"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/include/openssl/ssl.h"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/openssl/ssl.h"
+      - "/usr/X11R6/include/include/openssl/ssl.h"
+      - "/usr/X11R6/include/openssl/ssl.h"
+      - "/usr/X11R6/include/openssl/ssl.h"
+      - "/usr/X11R6/openssl/ssl.h"
+      - "/usr/pkg/include/include/openssl/ssl.h"
+      - "/usr/pkg/include/openssl/ssl.h"
+      - "/usr/pkg/include/openssl/ssl.h"
+      - "/usr/pkg/openssl/ssl.h"
+      - "/opt/include/include/openssl/ssl.h"
+      - "/opt/include/openssl/ssl.h"
+      - "/opt/include/openssl/ssl.h"
+      - "/opt/openssl/ssl.h"
+      - "/usr/include/X11/include/openssl/ssl.h"
+      - "/usr/include/X11/openssl/ssl.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenSSL.cmake:628 (find_library)"
+      - "vendor/cpp-httplib/CMakeLists.txt:127 (find_package)"
+    mode: "library"
+    variable: "OPENSSL_SSL_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ssl"
+      - "ssleay32"
+      - "ssleay32MD"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/sbin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/usr/bin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/sbin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/bin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/local/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/usr/"
+      - "/usr/"
+      - "/lib/"
+      - "/lib/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+      - "/opt/"
+      - "/opt/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/share/cmake-4.3/Modules/FindOpenSSL.cmake:642 (find_library)"
+      - "vendor/cpp-httplib/CMakeLists.txt:127 (find_package)"
+    mode: "library"
+    variable: "OPENSSL_CRYPTO_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "crypto"
+    candidate_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+    searched_directories:
+      - "/home/opencode/.local/bin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/local/lib/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/lib/"
+      - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data/"
+      - "/opt/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/opencode/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/home/opencode/.local/lib/python3.14/site-packages/cmake/data"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+...

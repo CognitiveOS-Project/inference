@@ -1,0 +1,30 @@
+{
+	"InstallScripts" : 
+	[
+		"/workspace/inference/vendor/llama.cpp/build/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/ggml/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/ggml/src/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/ggml/src/ggml-cpu/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/src/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/common/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/vendor/cpp-httplib/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/batched-bench/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/gguf-split/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/imatrix/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/llama-bench/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/completion/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/perplexity/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/quantize/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/tokenize/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/parser/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/tts/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/mtmd/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/cvector-generator/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/export-lora/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/fit-params/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/tools/results/cmake_install.cmake",
+		"/workspace/inference/vendor/llama.cpp/build/app/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

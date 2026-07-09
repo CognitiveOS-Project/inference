@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../libllama-completion-impl.a "CMakeFiles/llama-completion-impl.dir/completion.cpp.o"
+/usr/bin/ranlib ../../libllama-completion-impl.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../libllama-batched-bench-impl.a "CMakeFiles/llama-batched-bench-impl.dir/batched-bench.cpp.o"
+/usr/bin/ranlib ../../libllama-batched-bench-impl.a

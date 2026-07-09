@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/llama-mtmd-cli.dir/link.d "CMakeFiles/llama-mtmd-cli.dir/mtmd-cli.cpp.o" -o ../../bin/llama-mtmd-cli  ../../libllama-common.a ../../libmtmd.a ../../libllama-common-base.a ../../libcpp-httplib.a ../../libllama.a ../../libggml.a -ldl ../../libggml-cpu.a ../../libggml-base.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a
