@@ -6,9 +6,16 @@ SHELL := /bin/sh
 BUILD_DIR := build
 BIN_DIR := $(BUILD_DIR)/bin
 
-.PHONY: build build-mock test lint clean build-llama pack
+.PHONY: build build-mock test lint clean build-llama pack publish
 
-build: $(BIN_DIR)/coginfer $(BIN_DIR)/cograw
+build:
+	@if [ "$$CGO_ENABLED" = "0" ]; then \
+		echo "  CGO_ENABLED=0: building mock backend"; \
+		$(MAKE) build-mock; \
+	else \
+		echo "  CGO_ENABLED=1: building production backend"; \
+		$(MAKE) $(BIN_DIR)/coginfer $(BIN_DIR)/cograw; \
+	fi
 
 build-mock:
 	@mkdir -p $(BIN_DIR)
@@ -41,6 +48,18 @@ pack: build
 	@mkdir -p $(BIN_DIR)
 	@$${CPM} pack --bin $(BIN_DIR)/coginfer --name coginfer --version $$VERSION --os linux --arch amd64 --description "CognitiveOS Wide Model inference engine"
 	@$${CPM} pack --bin $(BIN_DIR)/cograw --name cograw --version $$VERSION --os linux --arch amd64 --description "CognitiveOS Raw Model firmware guardrail"
+
+publish: pack
+	@if [ -z "$${REGISTRY_TOKEN}" ]; then \
+		echo "  ERROR: REGISTRY_TOKEN not set"; exit 1; \
+	fi
+	@VERSION=$$(git describe --tags --abbrev=0 2>/dev/null || echo "dev")
+	@for cgp in *.cgp; do \
+		[ -f "$$cgp" ] || continue; \
+		URL="https://github.com/CognitiveOS-Project/inference/releases/download/$$VERSION/$$(basename $$cgp)"; \
+		/workspace/cpm/build/bin/cpm publish "$$cgp" --download-url "$$URL"; \
+		rm "$$cgp"; \
+	done
 
 test:
 	CGO_ENABLED=0 go test ./... -v -count=1
