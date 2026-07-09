@@ -6,7 +6,7 @@ SHELL := /bin/sh
 BUILD_DIR := build
 BIN_DIR := $(BUILD_DIR)/bin
 
-.PHONY: build build-mock test lint clean build-llama
+.PHONY: build build-mock test lint clean build-llama pack
 
 build: $(BIN_DIR)/coginfer $(BIN_DIR)/cograw
 
@@ -34,6 +34,13 @@ $(BIN_DIR)/coginfer $(BIN_DIR)/cograw: build-llama
 	CGO_ENABLED=1 CGO_CFLAGS="-Ivendor/llama.cpp/ggml/include" \
 		CGO_LDFLAGS="-Lvendor/llama.cpp/build/src -lllama $$(for lib in vendor/llama.cpp/build/libggml*.a; do libname=$$(basename "$$lib" .a | sed 's/^lib//'); echo -n " -l$$libname"; done) -lgomp" \
 		go build -tags=cgo -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
+
+pack: build
+	@VERSION=$$(git describe --tags --abbrev=0 2>/dev/null || echo "dev")
+	@CPM=/workspace/cpm/build/bin/cpm
+	@mkdir -p $(BIN_DIR)
+	@$${CPM} pack --bin $(BIN_DIR)/coginfer --name coginfer --version $$VERSION --os linux --arch amd64 --description "CognitiveOS Wide Model inference engine"
+	@$${CPM} pack --bin $(BIN_DIR)/cograw --name cograw --version $$VERSION --os linux --arch amd64 --description "CognitiveOS Raw Model firmware guardrail"
 
 test:
 	CGO_ENABLED=0 go test ./... -v -count=1
