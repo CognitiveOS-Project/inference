@@ -91,6 +91,28 @@ func (c *CgoBackend) Load(modelPath string, opts *LoadOptions) (*ModelInfo, erro
 	return c.modelInfo, nil
 }
 
+func (c *CgoBackend) LoadAdapter(adapterPath string) error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if !c.loaded || c.cg == nil {
+		return fmt.Errorf("E_MODEL_NOT_LOADED: cannot load adapter without a base model")
+	}
+
+	if _, err := os.Stat(adapterPath); os.IsNotExist(err) {
+		return fmt.Errorf("E_ADAPTER_NOT_FOUND: %s", adapterPath)
+	}
+
+	if err := bridgeLoadAdapter(c.cg, adapterPath); err != nil {
+		return err
+	}
+
+	if c.modelInfo != nil {
+		c.modelInfo.Name = fmt.Sprintf("%s + adapter(%s)", c.modelPath, adapterPath)
+	}
+
+	return nil
+}
+
 func (c *CgoBackend) Unload() error {
 	c.mu.Lock()
 	defer c.mu.Unlock()

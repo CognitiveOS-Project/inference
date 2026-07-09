@@ -135,6 +135,14 @@ type psModel struct {
 	ContextUsagePct int     `json:"context_usage_percent"`
 }
 
+type adapterRequest struct {
+	AdapterPath string `json:"adapter_path"`
+}
+
+type adapterResponse struct {
+	Status string `json:"status"`
+}
+
 func New(modelDir string, backendType string) *Server {
 	var b llm.Backend
 	switch backendType {
@@ -163,6 +171,7 @@ func (s *Server) Listen(addr string) error {
 	mux.HandleFunc("/api/pull", s.handlePull)
 	mux.HandleFunc("/api/ps", s.handlePs)
 	mux.HandleFunc("/api/delete", s.handleDelete)
+	mux.HandleFunc("/api/adapter", s.handleAdapter)
 	mux.HandleFunc("/api/negotiate", s.handleNegotiate)
 	mux.HandleFunc("/cognitiveos/status", s.handleStatus)
 	mux.HandleFunc("/cognitiveos/capabilities", s.handleCapabilities)
@@ -568,6 +577,37 @@ func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 		Status:    "ok",
 		RAMFreedMB: ramFreed,
 	})
+}
+
+func (s *Server) handleAdapter(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		sendError(w, 405, "E_INVALID_PARAMS: method not allowed")
+		return
+	}
+
+	var req adapterRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		sendError(w, 400, "E_INVALID_PARAMS: "+err.Error())
+		return
+	}
+
+	if req.AdapterPath == "" {
+		sendError(w, 400, "E_INVALID_PARAMS: adapter_path is required")
+		return
+	}
+
+	s.touchActivity()
+
+	s.mu.Lock()
+	if err := s.backend.LoadAdapter(req.AdapterPath); err != nil {
+		s.mu.Unlock()
+		s.setLastError(err.Error())
+		sendError(w, 500, err.Error())
+		return
+	}
+	s.mu.Unlock()
+
+	sendJSON(w, 200, adapterResponse{Status: "success"})
 }
 
 func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {

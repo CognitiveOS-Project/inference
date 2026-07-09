@@ -59,6 +59,7 @@ type Backend interface {
 	Name() string
 	Generate(req GenerateReq, onToken func(string)) (*GenerateResp, error)
 	Load(modelPath string, opts *LoadOptions) (*ModelInfo, error)
+	LoadAdapter(adapterPath string) error
 	Unload() error
 	IsLoaded() bool
 	LoadedModel() *ModelInfo
@@ -155,4 +156,16 @@ func (m *MockBackend) Generate(req GenerateReq, onToken func(string)) (*Generate
 	}, nil
 }
 
-func (m *MockBackend) Close() error { return m.Unload() }
+func (m *MockBackend) LoadAdapter(adapterPath string) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	if !m.loaded {
+		return fmt.Errorf("E_MODEL_NOT_LOADED: cannot load adapter without a base model")
+	}
+	m.modelInfo.Name = fmt.Sprintf("%s + adapter(%s)", m.modelPath, adapterPath)
+	return nil
+}
+
+func (m *MockBackend) Close() error {
+	return nil
+}

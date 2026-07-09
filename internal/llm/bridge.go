@@ -71,6 +71,17 @@ func (m *cgoModel) close() {
 	}
 }
 
+func bridgeLoadAdapter(cm *cgoModel, adapterPath string) error {
+	cpath := C.CString(adapterPath)
+	defer C.free(unsafe.Pointer(cpath))
+
+	if err := C.llama_model_load_adapter(cm.model, cpath, 0, 0); err != 0 {
+		return fmt.Errorf("E_INTERNAL: llama_model_load_adapter failed with code %d", int(err))
+	}
+
+	return nil
+}
+
 func (m *cgoModel) vocab() *C.struct_llama_vocab {
 	return C.llama_model_get_vocab(m.model)
 }
