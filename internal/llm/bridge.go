@@ -75,8 +75,15 @@ func bridgeLoadAdapter(cm *cgoModel, adapterPath string) error {
 	cpath := C.CString(adapterPath)
 	defer C.free(unsafe.Pointer(cpath))
 
-	if err := C.llama_model_load_adapter(cm.model, cpath, 0, 0); err != 0 {
-		return fmt.Errorf("E_INTERNAL: llama_model_load_adapter failed with code %d", int(err))
+	adapter := C.llama_adapter_lora_init(cm.model, cpath)
+	if adapter == nil {
+		return fmt.Errorf("E_INTERNAL: llama_adapter_lora_init returned null for %s", adapterPath)
+	}
+
+	adapters := &adapter
+	if err := C.llama_set_adapters_lora(cm.ctx, adapters, 1, nil); err != 0 {
+		C.llama_adapter_lora_free(adapter)
+		return fmt.Errorf("E_INTERNAL: llama_set_adapters_lora failed with code %d", int(err))
 	}
 
 	return nil
