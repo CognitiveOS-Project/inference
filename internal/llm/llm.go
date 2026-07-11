@@ -167,5 +167,5 @@ func (m *MockBackend) LoadAdapter(adapterPath string) error {
 }
 
 func (m *MockBackend) Close() error {
-	return nil
+	return m.Unload()
 }
