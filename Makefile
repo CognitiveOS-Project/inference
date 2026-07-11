@@ -23,7 +23,12 @@ build-mock:
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
 
 build-llama:
-	@if [ -f vendor/llama.cpp/CMakeLists.txt ] && [ ! -f vendor/llama.cpp/build/libllama.a ]; then
+	@if [ ! -d vendor/llama.cpp ]; then \
+		echo "  Cloning llama.cpp into vendor/..."; \
+		mkdir -p vendor; \
+		git clone --depth=1 https://github.com/ggerganov/llama.cpp.git vendor/llama.cpp; \
+	fi
+	@if [ ! -f vendor/llama.cpp/build/libllama.a ]; then
 		cd vendor/llama.cpp
 		cmake -B build -DLLAMA_NATIVE=0 -DBUILD_SHARED_LIBS=0 \
 			-DLLAMA_BUILD_TESTS=0 -DLLAMA_BUILD_EXAMPLES=0 -DLLAMA_BUILD_SERVER=0 \
