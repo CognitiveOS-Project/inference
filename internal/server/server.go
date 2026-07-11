@@ -106,10 +106,6 @@ type pullRequest struct {
 	Insecure bool   `json:"insecure"`
 }
 
-type deleteRequest struct {
-	Model string `json:"model"`
-}
-
 type healthResponse struct {
 	Status          string `json:"status"`
 	UptimeSeconds   int64  `json:"uptime_seconds"`
