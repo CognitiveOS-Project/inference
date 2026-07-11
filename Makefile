@@ -6,9 +6,10 @@ SHELL := /bin/sh
 BUILD_DIR := build
 BIN_DIR := $(BUILD_DIR)/bin
 
-.PHONY: build build-mock test lint clean build-llama pack publish
-
+.PHONY: build build-mock test lint clean build-llama pack publish build-dependencies
+ 
 build:
+
 	@if [ "$$CGO_ENABLED" = "0" ]; then \
 		echo "  CGO_ENABLED=0: building mock backend"; \
 		$(MAKE) build-mock; \
@@ -22,12 +23,14 @@ build-mock:
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/coginfer ./cmd/coginfer
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN_DIR)/cograw ./cmd/cograw
 
-build-llama:
+build-dependencies:
 	@if [ ! -d vendor/llama.cpp ]; then \
 		echo "  Cloning llama.cpp into vendor/..."; \
 		mkdir -p vendor; \
 		git clone --depth=1 https://github.com/ggerganov/llama.cpp.git vendor/llama.cpp; \
 	fi
+ 
+build-llama: build-dependencies
 	@if [ ! -f vendor/llama.cpp/build/libllama.a ]; then
 		cd vendor/llama.cpp
 		cmake -B build -DLLAMA_NATIVE=0 -DBUILD_SHARED_LIBS=0 \
