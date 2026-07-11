@@ -162,3 +162,10 @@ cograw starts **before** cognitiveosd. The daemon hard-fails if the raw socket i
 - [raw-model.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/raw-model.md) — authoritative Raw Model specification
 - [architecture.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/architecture.md) — system architecture and layer diagram
 - [cognitiveosd-api.md](https://github.com/CognitiveOS-Project/product-specs/blob/development/specs/cognitiveosd-api.md) — daemon protocol and message types
+
+## Cloning Convention
+- Use SSH () for development.
+- Use HTTPS () for build scripts that clone public dependencies.
+## Cloning Convention
+- Use SSH (git@github.com:) for development.
+- Use HTTPS (https://github.com/) for build scripts that clone public dependencies.
