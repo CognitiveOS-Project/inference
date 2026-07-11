@@ -18,6 +18,9 @@ jobs:
       - name: Build (Mock)
         run: make build-mock
 
+      - name: Install Dependencies
+        run: make build-dependencies
+
       - name: Lint
         uses: golangci/golangci-lint-action@v6
         with:
