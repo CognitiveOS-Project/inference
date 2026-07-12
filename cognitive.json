@@ -1,0 +1,9 @@
+{
+  "name": "coginfer",
+  "version": "0.1.0",
+  "description": "CognitiveOS Wide Model inference engine",
+  "hardware_requirements": {
+    "os": ["linux"],
+    "arch": ["amd64", "arm64"]
+  }
+}
