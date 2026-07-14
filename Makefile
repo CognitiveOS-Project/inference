@@ -9,14 +9,17 @@ BIN_DIR := $(BUILD_DIR)/bin
 .PHONY: build build-mock test lint clean build-llama pack publish build-dependencies
  
 build:
-
-	@if [ "$$CGO_ENABLED" = "0" ]; then \
+	@if [ "$${CGO_ENABLED:-}" = "0" ]; then \
 		echo "  CGO_ENABLED=0: building mock backend"; \
 		$(MAKE) build-mock; \
-	else \
+	elif [ "$${CGO_ENABLED:-}" = "1" ]; then \
 		echo "  CGO_ENABLED=1: building production backend"; \
 		$(MAKE) $(BIN_DIR)/coginfer $(BIN_DIR)/cograw; \
+	else \
+		echo "  ERROR: CGO_ENABLED must be set to 0 (mock) or 1 (production)"; \
+		exit 1; \
 	fi
+
 
 build-mock:
 	@mkdir -p $(BIN_DIR)
