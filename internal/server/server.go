@@ -741,23 +741,25 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	if !s.backend.IsLoaded() {
 		status = "degraded"
 	}
-
+ 
 	var mem runtime.MemStats
 	runtime.ReadMemStats(&mem)
-	ramPct := 50
-	if mem.TotalAlloc > 0 {
-		ramPct = int(mem.Alloc * 100 / mem.TotalAlloc)
+	
+	totalRAM, _ := readMemMB()
+	ramPct := 0
+	if totalRAM > 0 {
+		ramPct = int(int64(mem.Alloc) * 100 / (totalRAM * 1024 * 1024))
 	}
-
+ 
 	modelsLoaded := 0
 	if s.backend.IsLoaded() {
 		modelsLoaded = 1
 	}
-
+ 
 	s.mu.Lock()
 	lastErr := s.lastError
 	s.mu.Unlock()
-
+ 
 	sendJSON(w, 200, healthResponse{
 		Status:          status,
 		UptimeSeconds:   int64(time.Since(s.startTime).Seconds()),
