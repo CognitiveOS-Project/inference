@@ -159,7 +159,7 @@ func New(modelDir string, backendType string) *Server {
 	}
 }
 
-func (s *Server) Listen(addr string) error {
+func (s *Server) Listen(addr string) (*http.Server, error) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/generate", s.handleGenerate)
 	mux.HandleFunc("/api/chat", s.handleChat)
@@ -176,7 +176,16 @@ func (s *Server) Listen(addr string) error {
 	go s.idleTimeoutLoop()
 
 	log.Printf("coginfer listening on %s (backend=%s)", addr, s.backendType)
-	return http.ListenAndServe(addr, mux)
+	return &http.Server{
+		Addr:    addr,
+		Handler: mux,
+	}, nil
+}
+
+func (s *Server) Shutdown() error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.backend.Unload()
 }
 
 func (s *Server) idleTimeoutLoop() {

@@ -246,6 +246,7 @@ func main() {
 
 	socketPath := flag.String("socket", "/cognitiveos/run/raw.sock", "Unix socket path")
 	modelPath := flag.String("model", "/cognitiveos/models/raw/raw-model.gguf", "Raw Model GGUF path")
+	backend := flag.String("backend", "cgo", "Inference backend (mock, cgo)")
 	logFile := flag.String("log", "", "log file path")
 	auditLogPath := flag.String("audit-log", "/cognitiveos/logs/raw/audit.log", "audit log file path")
 	flag.Parse()
@@ -261,11 +262,18 @@ func main() {
 
 	initRawLog(*auditLogPath)
 
-	rm := NewRawModel(newBackend())
-	if err := rm.verifyModel(*modelPath); err != nil {
-		log.Fatalf("FATAL: raw model integrity check failed: %v\nSystem halted. Please reflash firmware.", err)
+	rm := NewRawModel(newBackend(*backend))
+	if *backend != "mock" {
+		if err := rm.verifyModel(*modelPath); err != nil {
+			log.Fatalf("FATAL: raw model integrity check failed: %v\nSystem halted. Please reflash firmware.", err)
+		}
+	} else {
+		log.Printf("cograw starting in mock mode (guardrail disabled)")
+		rm.loaded = true
+		rm.model = "mock-model"
+		rm.quant = "N/A"
 	}
-	logAudit("startup", fmt.Sprintf("raw model loaded: %s", *modelPath))
+	logAudit("startup", fmt.Sprintf("raw model loaded: %s (backend=%s)", *modelPath, *backend))
 
 	_ = os.Remove(*socketPath)
 	addr, err := net.ResolveUnixAddr("unix", *socketPath)
