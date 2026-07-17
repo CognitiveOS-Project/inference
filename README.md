@@ -141,6 +141,7 @@ The raw model file is stored at `/cognitiveos/models/raw/raw-model.gguf` on a re
 
 - [Product Specs](https://github.com/CognitiveOS-Project/product-specs) — authoritative specs for raw-model, architecture, API, and security model
 - [cognitiveosd](https://github.com/CognitiveOS-Project/cognitiveosd) — daemon that manages the Wide Model and routes tool calls
+- [coginit](https://github.com/CognitiveOS-Project/coginit) — boot manager that starts inference engines
 - [CognitiveOS Project](https://github.com/CognitiveOS-Project) — GitHub organization
 
 ## Build
