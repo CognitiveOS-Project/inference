@@ -21,7 +21,7 @@ func startTestServer(t *testing.T) (*httptest.Server, string) {
 	_ = os.MkdirAll(filepath.Join(modelDir, "wide", "active"), 0755)
 	_ = os.WriteFile(filepath.Join(modelDir, "test-model.gguf"), []byte("dummy-model-data"), 0644)
 
-	s := New(modelDir, "mock")
+	s := New(modelDir, "mock", nil)
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/generate", s.handleGenerate)
 	mux.HandleFunc("/api/chat", s.handleChat)

@@ -11,6 +11,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/CognitiveOS-Project/inference/internal/cloud"
 	"github.com/CognitiveOS-Project/inference/internal/llm"
 	"github.com/CognitiveOS-Project/inference/internal/model"
 )
@@ -139,11 +140,13 @@ type adapterResponse struct {
 	Status string `json:"status"`
 }
 
-func New(modelDir string, backendType string) *Server {
+func New(modelDir string, backendType string, cloudCfg *cloud.Config) *Server {
 	var b llm.Backend
 	switch backendType {
 	case "cgo":
 		b = newCgoBackend()
+	case "cloud":
+		b = cloud.New(cloudCfg)
 	case "mock":
 		b = llm.NewMockBackend()
 	default:
