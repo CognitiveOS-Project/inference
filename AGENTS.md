@@ -142,6 +142,7 @@ CGO_ENABLED=0 go build -o bin/cograw ./cmd/cograw
 |------|---------|-------------|
 | `--socket` | `/cognitiveos/run/raw.sock` | Unix socket path |
 | `--model` | `/cognitiveos/models/raw/raw-model.gguf` | Raw model GGUF path |
+| `--backend` | `cgo` | Inference backend (`mock`, `cgo`) |
 | `--log` | (stderr) | Log file path |
 | `--audit-log` | `/cognitiveos/logs/raw/audit.log` | Audit log file path |
 
