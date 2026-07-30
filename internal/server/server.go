@@ -396,7 +396,7 @@ func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 
 	var promptBuilder strings.Builder
 	for _, msg := range req.Messages {
-		fmt.Fprintf(&promptBuilder, "%s: %s\n", msg.Role, msg.Content)
+		_, _ = fmt.Fprintf(&promptBuilder, "%s: %s\n", msg.Role, msg.Content)
 	}
 	prompt := promptBuilder.String()
 
@@ -734,7 +734,7 @@ func (s *Server) queryRawModel() *rawModelInfo {
 		"id":      1,
 		"method":  "healthcheck",
 	})
-	conn.SetDeadline(time.Now().Add(2 * time.Second))
+	_ = conn.SetDeadline(time.Now().Add(2 * time.Second))
 	if _, err := conn.Write(append(req, '\n')); err != nil {
 		return info
 	}

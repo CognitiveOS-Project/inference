@@ -110,7 +110,7 @@ func TestLifecycle(t *testing.T) {
 
 func TestDoubleUnload(t *testing.T) {
 	b := New(newTestConfig())
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	if err := b.Unload(); err != nil {
 		t.Fatalf("first Unload failed: %v", err)
 	}
@@ -121,7 +121,7 @@ func TestDoubleUnload(t *testing.T) {
 
 func TestClose(t *testing.T) {
 	b := New(newTestConfig())
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	if err := b.Close(); err != nil {
 		t.Fatalf("Close failed: %v", err)
 	}
@@ -166,18 +166,18 @@ func TestGenerateSyncSuccess(t *testing.T) {
 		}
 		if !req.Stream {
 			resp := chatResponse{}
-			json.Unmarshal([]byte(`[{"message":{"content":"Hello, world!"},"finish_reason":"stop"}]`), &resp.Choices)
+			_ = json.Unmarshal([]byte(`[{"message":{"content":"Hello, world!"},"finish_reason":"stop"}]`), &resp.Choices)
 			resp.Usage.PromptTokens = 10
 			resp.Usage.CompletionTokens = 3
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(resp)
+			_ = json.NewEncoder(w).Encode(resp)
 		}
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4o-mini", APIKey: "sk-test-key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 
 	result, err := b.Generate(llm.GenerateReq{Prompt: "test", Stream: false}, nil)
 	if err != nil {
@@ -200,7 +200,7 @@ func TestGenerateSyncSuccess(t *testing.T) {
 func TestGenerateSyncWithSystemPrompt(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var req chatRequest
-		json.NewDecoder(r.Body).Decode(&req)
+		_ = json.NewDecoder(r.Body).Decode(&req)
 		if len(req.Messages) != 2 {
 			t.Fatalf("expected 2 messages (system+user), got %d", len(req.Messages))
 		}
@@ -208,15 +208,15 @@ func TestGenerateSyncWithSystemPrompt(t *testing.T) {
 			t.Fatalf("expected system role, got %q", req.Messages[0].Role)
 		}
 		resp := chatResponse{}
-		json.Unmarshal([]byte(`[{"message":{"content":"ok"},"finish_reason":"stop"}]`), &resp.Choices)
+		_ = json.Unmarshal([]byte(`[{"message":{"content":"ok"},"finish_reason":"stop"}]`), &resp.Choices)
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(resp)
+		_ = json.NewEncoder(w).Encode(resp)
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	_, err := b.Generate(llm.GenerateReq{Prompt: "hello", System: "be concise", Stream: false}, nil)
 	if err != nil {
 		t.Fatalf("Generate failed: %v", err)
@@ -226,13 +226,13 @@ func TestGenerateSyncWithSystemPrompt(t *testing.T) {
 func TestGenerateSyncHTTPError(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusTooManyRequests)
-		w.Write([]byte("rate limited"))
+		_, _ = w.Write([]byte("rate limited"))
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	_, err := b.Generate(llm.GenerateReq{Prompt: "hi", Stream: false}, nil)
 	if err == nil {
 		t.Fatal("expected error for HTTP 429")
@@ -243,13 +243,13 @@ func TestGenerateSyncEmptyChoices(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		resp := chatResponse{}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(resp)
+		_ = json.NewEncoder(w).Encode(resp)
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	_, err := b.Generate(llm.GenerateReq{Prompt: "hi", Stream: false}, nil)
 	if err == nil || err.Error() != "cloud API returned no choices" {
 		t.Fatalf("expected 'no choices' error, got %v", err)
@@ -259,13 +259,13 @@ func TestGenerateSyncEmptyChoices(t *testing.T) {
 func TestGenerateSyncMalformedJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{malformed`))
+		_, _ = w.Write([]byte(`{malformed`))
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	_, err := b.Generate(llm.GenerateReq{Prompt: "hi", Stream: false}, nil)
 	if err == nil {
 		t.Fatal("expected decode error")
@@ -275,7 +275,7 @@ func TestGenerateSyncMalformedJSON(t *testing.T) {
 func TestGenerateStreamSuccess(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var req chatRequest
-		json.NewDecoder(r.Body).Decode(&req)
+		_ = json.NewDecoder(r.Body).Decode(&req)
 		if req.Stream != true {
 			t.Fatal("expected stream=true in request")
 		}
@@ -286,17 +286,17 @@ func TestGenerateStreamSuccess(t *testing.T) {
 		}
 		for _, token := range []string{"Hello", ", ", "world", "!"} {
 			chunk := fmt.Sprintf(`data: {"choices":[{"delta":{"content":"%s"},"finish_reason":null}]}`+"\n\n", token)
-			fmt.Fprint(w, chunk)
+			_, _ = fmt.Fprint(w, chunk)
 			flusher.Flush()
 		}
-		fmt.Fprint(w, "data: [DONE]\n\n")
+		_, _ = fmt.Fprint(w, "data: [DONE]\n\n")
 		flusher.Flush()
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 
 	var tokens []string
 	result, err := b.Generate(llm.GenerateReq{Prompt: "test", Stream: true}, func(tok string) {
@@ -319,13 +319,13 @@ func TestGenerateStreamSuccess(t *testing.T) {
 func TestGenerateStreamHTTPError(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte("bad key"))
+		_, _ = w.Write([]byte("bad key"))
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "bad"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	_, err := b.Generate(llm.GenerateReq{Prompt: "hi", Stream: true}, nil)
 	if err == nil {
 		t.Fatal("expected error for HTTP 401")
@@ -339,14 +339,14 @@ func TestGenerateStreamImmediateDone(t *testing.T) {
 		if !ok {
 			t.Fatal("response writer does not support flush")
 		}
-		fmt.Fprint(w, "data: [DONE]\n\n")
+		_, _ = fmt.Fprint(w, "data: [DONE]\n\n")
 		flusher.Flush()
 	}))
 	defer srv.Close()
 
 	cfg := &Config{APIBase: srv.URL, ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 
 	result, err := b.Generate(llm.GenerateReq{Prompt: "test", Stream: true}, nil)
 	if err != nil {
@@ -360,7 +360,7 @@ func TestGenerateStreamImmediateDone(t *testing.T) {
 func TestCloudEndpointURLTrimSlash(t *testing.T) {
 	cfg := &Config{APIBase: "https://api.openai.com/", ModelID: "gpt-4", APIKey: "key"}
 	b := New(cfg)
-	b.Load("ignored", llm.DefaultLoadOptions())
+	_, _ = b.Load("ignored", llm.DefaultLoadOptions())
 	if b.modelInfo.Path != "https://api.openai.com//v1/chat/completions" {
 		t.Fatalf("unexpected path: %s", b.modelInfo.Path)
 	}
