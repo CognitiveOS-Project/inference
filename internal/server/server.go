@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -651,17 +652,16 @@ func (s *Server) handleNegotiate(w http.ResponseWriter, r *http.Request) {
 	_, availableRAM := readMemMB()
 
 	if estimatedRAM > availableRAM {
-		sendJSON(w, 200, negotiateResponse{
+		alts := s.findQuantizedAlternatives(modelPath, estimatedRAM)
+		errResp := negotiateResponse{
 			Status: "error",
 			Error: &negotiateError{
 				Code:    "E_INSUFFICIENT_RESOURCES",
 				Message: fmt.Sprintf("Model requires %d MB RAM, %d MB available", estimatedRAM, availableRAM),
 			},
-			Alts: []negotiateAlt{
-				{Model: modelPath + "-q4_0.gguf", RAMUsageMB: estimatedRAM * 3 / 4, PerformanceTokensPerS: 32.1},
-				{Model: modelPath + "-q2_k.gguf", RAMUsageMB: estimatedRAM / 2, PerformanceTokensPerS: 25.0},
-			},
-		})
+			Alts: alts,
+		}
+		sendJSON(w, 200, errResp)
 		return
 	}
 
@@ -752,6 +752,39 @@ func (s *Server) queryRawModel() *rawModelInfo {
 		}
 	}
 	return info
+}
+
+func (s *Server) findQuantizedAlternatives(modelPath string, baseRAM int64) []negotiateAlt {
+	dir := filepath.Dir(modelPath)
+	base := strings.TrimSuffix(filepath.Base(modelPath), ".gguf")
+
+	type quantInfo struct {
+		suffix string
+		factor float64
+		perf   float64
+	}
+	quants := []quantInfo{
+		{"-q8_0.gguf", 0.50, 45.0},
+		{"-q6_k.gguf", 0.38, 38.0},
+		{"-q5_k_m.gguf", 0.33, 35.0},
+		{"-q4_k_m.gguf", 0.28, 32.0},
+		{"-q3_k_m.gguf", 0.22, 28.0},
+		{"-q2_k.gguf", 0.17, 25.0},
+	}
+
+	var alts []negotiateAlt
+	for _, q := range quants {
+		altPath := filepath.Join(dir, base+q.suffix)
+		if info, err := os.Stat(altPath); err == nil {
+			ram := int64(float64(info.Size())*1.2) / (1024 * 1024)
+			alts = append(alts, negotiateAlt{
+				Model:                 altPath,
+				RAMUsageMB:            ram,
+				PerformanceTokensPerS: q.perf,
+			})
+		}
+	}
+	return alts
 }
 
 func (s *Server) handleCapabilities(w http.ResponseWriter, r *http.Request) {
