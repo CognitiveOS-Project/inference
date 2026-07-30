@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"runtime"
@@ -543,7 +544,10 @@ func (s *Server) handlePs(w http.ResponseWriter, r *http.Request) {
 		}
 		processor := "CPU"
 		gpuLayers := 0
-		// Check if GPU layers configured — backend-specific
+		if mi.VRAMUsageMB > 0 {
+			processor = "CPU+GPU"
+			gpuLayers = int(mi.VRAMUsageMB / 1024)
+		}
 
 		models = append(models, psModel{
 			Name:            mi.Name,
@@ -696,16 +700,13 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	totalRAM, availableRAM := readMemMB()
 	cpuCores := runtime.NumCPU()
 
+	rawInfo := s.queryRawModel()
 	resp := StatusResponse{
 		Status:       status,
 		ModelsLoaded: modelsLoaded,
 		ActiveModel:  mi,
-		RawModel: &rawModelInfo{
-			Loaded:     false,
-			Path:       "/cognitiveos/models/raw/raw-model.gguf",
-			RAMUsageMB: 0,
-		},
-		Hardware: &hardwareInfo{
+		RawModel:     rawInfo,
+		Hardware:     &hardwareInfo{
 			TotalRAMMB:     totalRAM,
 			AvailableRAMMB: availableRAM,
 			CPUCores:       cpuCores,
@@ -714,6 +715,43 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendJSON(w, 200, resp)
+}
+
+func (s *Server) queryRawModel() *rawModelInfo {
+	info := &rawModelInfo{
+		Loaded:     false,
+		Path:       "/cognitiveos/models/raw/raw-model.gguf",
+		RAMUsageMB: 0,
+	}
+	conn, err := net.DialTimeout("unix", "/cognitiveos/run/raw.sock", 2*time.Second)
+	if err != nil {
+		return info
+	}
+	defer conn.Close()
+
+	req, _ := json.Marshal(map[string]interface{}{
+		"jsonrpc": "2.0",
+		"id":      1,
+		"method":  "healthcheck",
+	})
+	conn.SetDeadline(time.Now().Add(2 * time.Second))
+	if _, err := conn.Write(append(req, '\n')); err != nil {
+		return info
+	}
+
+	var resp map[string]interface{}
+	if err := json.NewDecoder(conn).Decode(&resp); err != nil {
+		return info
+	}
+	if result, ok := resp["result"].(map[string]interface{}); ok {
+		if loaded, ok := result["loaded"].(bool); ok {
+			info.Loaded = loaded
+		}
+		if ramMB, ok := result["ram_usage_mb"].(float64); ok {
+			info.RAMUsageMB = int64(ramMB)
+		}
+	}
+	return info
 }
 
 func (s *Server) handleCapabilities(w http.ResponseWriter, r *http.Request) {

@@ -17,7 +17,11 @@ import (
 func main() {
 	addr := flag.String("addr", "127.0.0.1:11434", "HTTP listen address")
 	modelDir := flag.String("models", "/cognitiveos/models", "model directory")
-	backend := flag.String("backend", "mock", "inference backend (mock, cgo, cloud)")
+	defaultBackend := "mock"
+	if os.Getenv("CGO_ENABLED") == "1" {
+		defaultBackend = "cgo"
+	}
+	backend := flag.String("backend", defaultBackend, "inference backend (mock, cgo, cloud)")
 	logFile := flag.String("log", "", "log file path")
 	apiBase := flag.String("api-base", "", "cloud API base URL (e.g. https://api.openai.com)")
 	cloudModel := flag.String("cloud-model", "", "cloud model ID (e.g. gpt-4o-mini)")
