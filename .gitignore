@@ -40,3 +40,6 @@ Thumbs.db
 *.swo
 coginfer
 build/
+
+# macOS AppleDouble / Finder metadata
+._*
