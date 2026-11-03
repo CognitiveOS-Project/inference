@@ -21,11 +21,11 @@ type Config struct {
 }
 
 type CloudBackend struct {
-	mu       sync.Mutex
-	config   *Config
-	loaded   bool
+	mu        sync.Mutex
+	config    *Config
+	loaded    bool
 	modelInfo *llm.ModelInfo
-	client   *http.Client
+	client    *http.Client
 }
 
 func New(cfg *Config) *CloudBackend {
@@ -112,8 +112,8 @@ type chatResponse struct {
 		FinishReason *string `json:"finish_reason"`
 	} `json:"choices"`
 	Usage struct {
-		TotalTokens int `json:"total_tokens"`
-		PromptTokens int `json:"prompt_tokens"`
+		TotalTokens      int `json:"total_tokens"`
+		PromptTokens     int `json:"prompt_tokens"`
 		CompletionTokens int `json:"completion_tokens"`
 	} `json:"usage"`
 }
