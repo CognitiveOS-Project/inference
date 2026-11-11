@@ -27,6 +27,7 @@ type Server struct {
 	mu        sync.Mutex
 
 	backendType string
+	rateLimiter *rateLimiter
 
 	lastActivity time.Time
 	lastError    string
@@ -156,27 +157,28 @@ func New(modelDir string, backendType string, cloudCfg *cloud.Config) *Server {
 	}
 
 	return &Server{
-		models:       model.NewManager(modelDir),
-		backend:      b,
-		startTime:    time.Now(),
-		backendType:  backendType,
+		models:      model.NewManager(modelDir),
+		backend:     b,
+		startTime:   time.Now(),
+		backendType: backendType,
+		rateLimiter: newRateLimiter(1*time.Minute, 60),
 		lastActivity: time.Now(),
 	}
 }
 
 func (s *Server) Listen(addr string) (*http.Server, error) {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/api/generate", s.handleGenerate)
-	mux.HandleFunc("/api/chat", s.handleChat)
-	mux.HandleFunc("/api/tags", s.handleTags)
-	mux.HandleFunc("/api/pull", s.handlePull)
-	mux.HandleFunc("/api/ps", s.handlePs)
-	mux.HandleFunc("/api/delete", s.handleDelete)
-	mux.HandleFunc("/api/adapter", s.handleAdapter)
-	mux.HandleFunc("/api/negotiate", s.handleNegotiate)
-	mux.HandleFunc("/cognitiveos/status", s.handleStatus)
-	mux.HandleFunc("/cognitiveos/capabilities", s.handleCapabilities)
-	mux.HandleFunc("/health", s.handleHealth)
+	mux.HandleFunc("/api/generate", s.middleware(s.handleGenerate))
+	mux.HandleFunc("/api/chat", s.middleware(s.handleChat))
+	mux.HandleFunc("/api/tags", s.middleware(s.handleTags))
+	mux.HandleFunc("/api/pull", s.middleware(s.handlePull))
+	mux.HandleFunc("/api/ps", s.middleware(s.handlePs))
+	mux.HandleFunc("/api/delete", s.middleware(s.handleDelete))
+	mux.HandleFunc("/api/adapter", s.middleware(s.handleAdapter))
+	mux.HandleFunc("/api/negotiate", s.middleware(s.handleNegotiate))
+	mux.HandleFunc("/cognitiveos/status", s.middleware(s.handleStatus))
+	mux.HandleFunc("/cognitiveos/capabilities", s.middleware(s.handleCapabilities))
+	mux.HandleFunc("/health", s.middleware(s.handleHealth))
 
 	go s.idleTimeoutLoop()
 
