@@ -38,6 +38,7 @@ func bridgeLoadModel(modelPath string, nCtx, nGPULayers, nThreads int) (*cgoMode
 	if model == nil {
 		return nil, fmt.Errorf("E_MODEL_LOAD_FAILED: llama_model_load_from_file returned null for %q", modelPath)
 	}
+	fmt.Printf("DEBUG: load model=%p, vocab=%p, path=%q\n", model, C.llama_model_get_vocab(model), modelPath)
 
 	cparams := C.llama_context_default_params()
 	cparams.n_ctx = C.uint32_t(nCtx)
@@ -90,7 +91,9 @@ func bridgeLoadAdapter(cm *cgoModel, adapterPath string) error {
 }
 
 func (m *cgoModel) vocab() *C.struct_llama_vocab {
-	return C.llama_model_get_vocab(m.model)
+	v := C.llama_model_get_vocab(m.model)
+	fmt.Printf("DEBUG: vocab() m.model=%p, vocab=%p\n", m.model, v)
+	return v
 }
 
 func (m *cgoModel) nCtx() int {
@@ -118,15 +121,20 @@ func bridgeTokenize(vocab *C.struct_llama_vocab, text string, addSpecial bool) (
 	ctext := C.CString(text)
 	defer C.free(unsafe.Pointer(ctext))
 
-	n := C.llama_tokenize(vocab, ctext, C.int32_t(len(text)), nil, 0, C.bool(addSpecial), false)
-	if n <= 0 {
-		return nil, fmt.Errorf("tokenize failed: text too long or empty")
-	}
-
-	ctokens := make([]C.llama_token, n)
-	n = C.llama_tokenize(vocab, ctext, C.int32_t(len(text)), &ctokens[0], C.int32_t(len(ctokens)), C.bool(addSpecial), false)
+	textLen := C.int32_t(len(text))
+	// First call: estimate buffer size. Some llama.cpp versions don't support
+	// NULL tokens for counting, so start with a reasonable estimate.
+	nTokens := C.int32_t(len(text)*2 + 16)
+	ctokens := make([]C.llama_token, nTokens)
+	n := C.llama_tokenize(vocab, ctext, textLen, &ctokens[0], nTokens, C.bool(addSpecial), false)
 	if n < 0 {
-		return nil, fmt.Errorf("tokenize failed on second pass")
+		// Buffer too small, retry with exact size returned (negative = required size)
+		nTokens = C.int32_t(-n)
+		ctokens = make([]C.llama_token, nTokens)
+		n = C.llama_tokenize(vocab, ctext, textLen, &ctokens[0], nTokens, C.bool(addSpecial), false)
+		if n < 0 {
+			return nil, fmt.Errorf("tokenize failed: %d", n)
+		}
 	}
 
 	tokens := make([]int32, n)
