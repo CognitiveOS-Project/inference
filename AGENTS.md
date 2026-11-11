@@ -167,6 +167,15 @@ cograw starts **before** cognitiveosd. The daemon hard-fails if the raw socket i
 ## Cloning Convention
 - Use SSH () for development.
 - Use HTTPS () for build scripts that clone public dependencies.
+
+## Process Enforcements (MANDATORY)
+
+All work in this repo MUST follow the CognitiveOS Process Enforcements:
+
+- `product-specs/docs/ENFORCEMENTS.md` — SPECv1, GHW, VibeLeading, ABSEv1
+- `sdlc/docs/ENFORCEMENTS.md` — same content (mirror)
+
+These enforcements are binding on every contributor, agent, and automation. No work may bypass them except on explicit user instruction (maintainer emergency).
 ## Cloning Convention
 - Use SSH (git@github.com:) for development.
 - Use HTTPS (https://github.com/) for build scripts that clone public dependencies.
