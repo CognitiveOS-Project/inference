@@ -48,14 +48,14 @@ type rawModelInfo struct {
 }
 
 type hardwareInfo struct {
-	TotalRAMMB     int64 `json:"total_ram_mb"`
-	AvailableRAMMB int64 `json:"available_ram_mb"`
-	TotalVRAMMB    int64 `json:"total_vram_mb,omitempty"`
+	TotalRAMMB      int64 `json:"total_ram_mb"`
+	AvailableRAMMB  int64 `json:"available_ram_mb"`
+	TotalVRAMMB     int64 `json:"total_vram_mb,omitempty"`
 	AvailableVRAMMB int64 `json:"available_vram_mb,omitempty"`
-	CPUCores       int   `json:"cpu_cores"`
-	CPUThreads     int   `json:"cpu_threads"`
-	NPUAvailable   bool  `json:"npu_available,omitempty"`
-	NPUMemoryMB    int64 `json:"npu_memory_mb,omitempty"`
+	CPUCores        int   `json:"cpu_cores"`
+	CPUThreads      int   `json:"cpu_threads"`
+	NPUAvailable    bool  `json:"npu_available,omitempty"`
+	NPUMemoryMB     int64 `json:"npu_memory_mb,omitempty"`
 }
 
 type capabilitiesResponse struct {
@@ -84,9 +84,9 @@ type negotiateError struct {
 }
 
 type negotiateAlt struct {
-	Model                  string  `json:"model"`
-	RAMUsageMB             int64   `json:"ram_usage_mb"`
-	PerformanceTokensPerS  float64 `json:"performance_tokens_per_second"`
+	Model                 string  `json:"model"`
+	RAMUsageMB            int64   `json:"ram_usage_mb"`
+	PerformanceTokensPerS float64 `json:"performance_tokens_per_second"`
 }
 
 type generateRequest struct {
@@ -98,9 +98,9 @@ type generateRequest struct {
 }
 
 type chatRequest struct {
-	Model    string          `json:"model"`
-	Messages []llm.ChatMsg   `json:"messages"`
-	Stream   bool            `json:"stream"`
+	Model    string                 `json:"model"`
+	Messages []llm.ChatMsg          `json:"messages"`
+	Stream   bool                   `json:"stream"`
 	Options  map[string]interface{} `json:"options,omitempty"`
 }
 
@@ -119,7 +119,7 @@ type healthResponse struct {
 }
 
 type deleteResponse struct {
-	Status    string `json:"status"`
+	Status     string `json:"status"`
 	RAMFreedMB int64  `json:"ram_freed_mb,omitempty"`
 }
 
@@ -589,7 +589,7 @@ func (s *Server) handleDelete(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendJSON(w, 200, deleteResponse{
-		Status:    "ok",
+		Status:     "ok",
 		RAMFreedMB: ramFreed,
 	})
 }
@@ -708,7 +708,7 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 		ModelsLoaded: modelsLoaded,
 		ActiveModel:  mi,
 		RawModel:     rawInfo,
-		Hardware:     &hardwareInfo{
+		Hardware: &hardwareInfo{
 			TotalRAMMB:     totalRAM,
 			AvailableRAMMB: availableRAM,
 			CPUCores:       cpuCores,
@@ -797,11 +797,11 @@ func (s *Server) handleCapabilities(w http.ResponseWriter, r *http.Request) {
 
 	caps := capabilitiesResponse{
 		Backends: map[string]bool{
-			"cpu":     true,
-			"cuda":    false,
-			"vulkan":  false,
-			"npu":     false,
-			"metal":   false,
+			"cpu":    true,
+			"cuda":   false,
+			"vulkan": false,
+			"npu":    false,
+			"metal":  false,
 		},
 		PreferredBackend: "cpu",
 		MaxModelSizeMB:   4096,
@@ -817,25 +817,25 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	if !s.backend.IsLoaded() {
 		status = "degraded"
 	}
- 
+
 	var mem runtime.MemStats
 	runtime.ReadMemStats(&mem)
-	
+
 	totalRAM, _ := readMemMB()
 	ramPct := 0
 	if totalRAM > 0 {
 		ramPct = int(int64(mem.Alloc) * 100 / (totalRAM * 1024 * 1024))
 	}
- 
+
 	modelsLoaded := 0
 	if s.backend.IsLoaded() {
 		modelsLoaded = 1
 	}
- 
+
 	s.mu.Lock()
 	lastErr := s.lastError
 	s.mu.Unlock()
- 
+
 	sendJSON(w, 200, healthResponse{
 		Status:          status,
 		UptimeSeconds:   int64(time.Since(s.startTime).Seconds()),

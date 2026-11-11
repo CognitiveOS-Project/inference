@@ -168,10 +168,10 @@ type ValidatePackageRequestParams struct {
 	PackageName      string `json:"package_name"`
 	Version          string `json:"version,omitempty"`
 	ManifestMetadata *struct {
-		HasRawModel  bool   `json:"has_raw_model,omitempty"`
-		DiskSpaceMB  int64  `json:"disk_space_mb,omitempty"`
-		Registry     string `json:"registry,omitempty"`
-		IsCritical   bool   `json:"is_critical,omitempty"`
+		HasRawModel bool   `json:"has_raw_model,omitempty"`
+		DiskSpaceMB int64  `json:"disk_space_mb,omitempty"`
+		Registry    string `json:"registry,omitempty"`
+		IsCritical  bool   `json:"is_critical,omitempty"`
 	} `json:"manifest_metadata,omitempty"`
 }
 
