@@ -1,7 +1,9 @@
 package server
 
 import (
+	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
 	"sync"
 	"time"
@@ -48,15 +50,22 @@ func (rl *rateLimiter) allow(ip string) bool {
 }
 
 // validateJSONBody checks that the request body is valid JSON for POST requests.
+// It reads the body into memory, validates JSON, then replaces the body reader
+// so downstream handlers can still read it.
 func validateJSONBody(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost && r.Body != nil {
-			var v interface{}
-			if err := json.NewDecoder(r.Body).Decode(&v); err != nil {
+			body, err := io.ReadAll(r.Body)
+			if err != nil {
 				http.Error(w, `{"error":"invalid JSON body","code":"E_INVALID_JSON"}`, http.StatusBadRequest)
 				return
 			}
-			_ = v
+			var v interface{}
+			if err := json.Unmarshal(body, &v); err != nil {
+				http.Error(w, `{"error":"invalid JSON body","code":"E_INVALID_JSON"}`, http.StatusBadRequest)
+				return
+			}
+			r.Body = io.NopCloser(bytes.NewReader(body))
 		}
 		next.ServeHTTP(w, r)
 	}
