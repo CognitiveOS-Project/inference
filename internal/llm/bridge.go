@@ -38,7 +38,6 @@ func bridgeLoadModel(modelPath string, nCtx, nGPULayers, nThreads int) (*cgoMode
 	if model == nil {
 		return nil, fmt.Errorf("E_MODEL_LOAD_FAILED: llama_model_load_from_file returned null for %q", modelPath)
 	}
-	fmt.Printf("DEBUG: load model=%p, vocab=%p, path=%q\n", model, C.llama_model_get_vocab(model), modelPath)
 
 	cparams := C.llama_context_default_params()
 	cparams.n_ctx = C.uint32_t(nCtx)
@@ -91,9 +90,7 @@ func bridgeLoadAdapter(cm *cgoModel, adapterPath string) error {
 }
 
 func (m *cgoModel) vocab() *C.struct_llama_vocab {
-	v := C.llama_model_get_vocab(m.model)
-	fmt.Printf("DEBUG: vocab() m.model=%p, vocab=%p\n", m.model, v)
-	return v
+	return C.llama_model_get_vocab(m.model)
 }
 
 func (m *cgoModel) nCtx() int {
